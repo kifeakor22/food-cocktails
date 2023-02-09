@@ -1,0 +1,15 @@
+.image {
+    display: block;
+    margin-left: 510px;
+
+}
+.container{
+    margin-top: 20px;
+}
+
+button{
+    padding: 0;
+    border: none;
+    background: none;
+
+}
