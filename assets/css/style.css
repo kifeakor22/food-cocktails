@@ -38,3 +38,11 @@ button{
 .modal button {
     background-color: green !important;
 }
+
+.modal-body p {
+    color: red;
+}
+
+.hide {
+    display: none;
+}
