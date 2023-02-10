@@ -1,18 +1,21 @@
 .image {
     display: block;
-    margin-left: 510px;
-
+    margin: 0 auto; /* center the image horizontally */
+    max-width: 100%; /* set a maximum width for the image */
+    height: auto; /* maintain aspect ratio by setting the height to auto */
 }
-.container{
+
+.container {
     margin-top: 20px;
+    text-align: center; /* center the text within the container */
 }
 
-button{
+button {
     padding: 0;
     border: none;
     background: none;
-
 }
+
 .jumbotron {
     background-color: white;
     text-align: center;
@@ -20,12 +23,15 @@ button{
 
 .jumbotron a {
     background-color: rgb(36, 226, 36) !important;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
 }
-
 
 .modal {
     text-align: center !important;
 }
+
 .modal-header {
     color: green;
     text-align: center !important;
@@ -35,6 +41,7 @@ button{
     background-color: green;
     color: white;
 }
+
 .modal button {
     background-color: green !important;
 }
@@ -45,4 +52,16 @@ button{
 
 .hide {
     display: none;
+}
+
+/* Media Queries */
+@media (max-width: 767px) {
+    .image {
+        width: 100%; /* make the image full width on smaller screens */
+    }
+
+    .jumbotron a {
+        display: block;
+        margin: 20px auto;
+    }
 }
