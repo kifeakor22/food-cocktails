@@ -13,3 +13,28 @@ button{
     background: none;
 
 }
+.jumbotron {
+    background-color: white;
+    text-align: center;
+}
+
+.jumbotron a {
+    background-color: rgb(36, 226, 36) !important;
+}
+
+
+.modal {
+    text-align: center !important;
+}
+.modal-header {
+    color: green;
+    text-align: center !important;
+}
+
+#randomDrink {
+    background-color: green;
+    color: white;
+}
+.modal button {
+    background-color: green !important;
+}
