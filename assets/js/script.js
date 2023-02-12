@@ -27,14 +27,15 @@ let queryKey = ''
 
 let countRadio = 0;
 apiSearchParams.forEach((apiSearchParam) => {
+    if (!apiSearchParam.checked) {
+        countRadio++
+    }
     apiSearchParam.addEventListener('change', () => {
-
         apiSearchParam.checked = true;
         setAPIURL(apiSearchParam)
 
     })
 })
-
 function setAPIURL(apiSearchParam) {
     if (apiSearchParam.checked) {
         searchType = apiSearchParam.value
@@ -57,17 +58,20 @@ function setAPIURL(apiSearchParam) {
             queryKey = 'strArea'
             break;
     }
-    console.log(apiMealURL)
-    console.log(parameter)
-    console.log(queryKey)
 }
 
 // add eventlisteners
 mealInput.addEventListener('input', getSuggestions)
 
-
+console.log(countRadio)
 //get suggestions as user types
 async function getSuggestions({ target }) {
+    if (countRadio == 3) {
+        apiSearchParams[0].checked = true;
+        setAPIURL(apiSearchParams[0])
+        countRadio = 0;
+    }
+
     let inputData = target.value;
 
     let suggestionBox = document.createElement('ul');
