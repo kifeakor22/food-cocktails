@@ -24,7 +24,7 @@
                 var drinkImg = $("<img>").addClass("card-img-top").attr("src", `${drink[0].strDrinkThumb}/preview`)
                 var drinkBody = $("<div>").addClass("card-body")
                 var drinkTitle = $("<button>").addClass("card-title btn btn-secondary").text(drink[0].strDrink)
-                var drinkInstruction = $("<p>").addClass("card-body").text(drink[0].strInstructions)
+                var drinkInstruction = $("<h4>").addClass("card-body").text(drink[0].strInstructions)
                 drinkTitle.attr("data-toggle", "modal")
                 drinkTitle.attr("data-target", "#drinkModal")
                 drinkCard.append(drinkImg,drinkBody,drinkTitle)
