@@ -17,7 +17,7 @@ body{
     font-size: 1.05rem;
     line-height: 1.6;
     font-family: 'Poppins', sans-serif;
-   
+
 }
 
 .btn{
@@ -271,22 +271,34 @@ a.btn.btn-outline-success:hover {
     margin: 0 auto; /* center the image horizontally */
     max-width: 100%; /* set a maximum width for the image */
     height: auto; /* maintain aspect ratio by setting the height to auto */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.image {
+  display: block;
+  margin: 0 auto; /* center the image horizontally */
+  max-width: 100%; /* set a maximum width for the image */
+  height: auto; /* maintain aspect ratio by setting the height to auto */
 }
 
 .container {
-    margin-top: 20px;
-    text-align: center; /* center the text within the container */
+  margin-top: 20px;
+  text-align: center; /* center the text within the container */
 }
 
 button {
-    padding: 0;
-    border: none;
-    background: none;
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 .jumbotron {
-    background-color: white;
-    text-align: center;
+  background-color: white;
+  text-align: center;
 }
 
 .jumbotron a {
@@ -297,7 +309,7 @@ button {
 }
 
 .modal {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .modal-header {
@@ -314,13 +326,6 @@ button {
     background-color: #fb8500 !important;
 }
 
-<<<<<<< Updated upstream
-
-=======
-.card { 
-    padding-bottom: 20px;
-}
->>>>>>> Stashed changes
 
 .noResults{
     grid-template-columns: 1fr!important;
@@ -371,17 +376,16 @@ button {
 }
 
 .hide {
-    display: none;
+  display: none;
 }
-
 
 .card {
-    margin: 20px;
-    font-weight: bolder;
-    font-size: x-large !important;
+  margin: 20px;
+  font-weight: bolder;
+  font-size: x-large !important;
 }
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 li {
@@ -393,14 +397,14 @@ h4 {
 
 /* Media Queries */
 @media (max-width: 767px) {
-    .image {
-        width: 100%; /* make the image full width on smaller screens */
-    }
+  .image {
+    width: 100%; /* make the image full width on smaller screens */
+  }
 
-    .jumbotron a {
-        display: block;
-        margin: 20px auto;
-    }
+  .jumbotron a {
+    display: block;
+    margin: 20px auto;
+  }
 }
 .wrapper {
     padding: 1rem;
@@ -427,3 +431,39 @@ h4 {
   }
 
 
+/******** meal page ******/
+#meal-form {
+  position: relative;
+  display: flex;
+  width: 100%;
+  gap: 5px;
+  margin: 10px;
+}
+#meal-input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+#search-button {
+  background-color: rgb(9, 129, 19);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+#autocomplete-list {
+  background-color: white;
+  /* border-top: #f1f1f1; */
+  width: 18.8rem;
+  height: 30rem;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  overflow-y: scroll;
+}
+/* #ul-suggestions {
+  height: 500px;
+} */

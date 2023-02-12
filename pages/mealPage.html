@@ -5,17 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <title>Document</title>
 </head>
 
 <body>
     <form autocomplete="off" id="meal-form">
         <div class="autocomplete" style="width:300px">
-            <input type="text" name="meal-input" id="meal" />
-            <datalist id="suggestions"></datalist>
+            <fieldset>
+                <legend>Select search type</legend>
+                <input type="radio" id="meal-name" name="api-search-param" value="name" class="api-search-param" />
+                <label for="meal-name">name</label>
+
+                <input type="radio" id="area-name" name="api-search-param" value="area" class="api-search-param" />
+                <label for="area-name">area</label>
+
+                <input type="radio" id="ingredient-name" name="api-search-param" value="ingredient"
+                    class="api-search-param" />
+                <label for="ingredient-name">ingredient</label>
+            </fieldset>
+            <input type="text" name="meal-input" id="meal-input" placeholder="meal/location/ingredient" />
         </div>
-        <input type="submit" />
+        <input type="submit" id="search-button" />
     </form>
+
+    <script src="../assets/js/script.js"></script>
 </body>
 
 </html>
