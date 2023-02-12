@@ -128,7 +128,9 @@ async function getSuggestionsFromAPI(inputValue) {
 
 }
 
-
+// TODO: Clear suggestions when user selects new radio button
+// TODO: make each suggestion item clickable and retrieve that data
+// TODO: make the submit button functional - retrieve all results and display them
 
 //geting foodlist with given search text
 
