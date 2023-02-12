@@ -40,9 +40,25 @@ button{
 }
 
 .modal-body p {
-    color: red;
+    color: rgb(9, 129, 19);
+}
+
+#drinkbody p {
+    color: green !important;
+
 }
 
 .hide {
     display: none;
+}
+
+.card {
+    margin: 20px;
+}
+ul {
+    list-style-type: none;
+}
+
+li {
+    color: rgb(228, 51, 51);
 }
