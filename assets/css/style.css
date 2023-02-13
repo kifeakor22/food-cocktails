@@ -46,7 +46,7 @@ body{
     margin: 2rem 0;
 }
 
-.meal-search{
+.food-search{
     margin: 1.2rem 0;
     display: flex;
     align-items: stretch;
@@ -182,10 +182,10 @@ body{
     padding: 2rem 0;
 }
 
-.meal-details::-webkit-scrollbar{
+.food-details::-webkit-scrollbar{
     width: 10px;
 }
-.meal-details::-webkit-scrollbar-thumb{
+.food-details::-webkit-scrollbar-thumb{
     background: #f0f0f0;
     border-radius: 2rem;
     -webkit-border-radius: 2rem;
@@ -193,7 +193,34 @@ body{
     -ms-border-radius: 2rem;
     -o-border-radius: 2rem;
 }
+.showRecipe{
+    display: block;
+}
 
+.food-contents{
+    margin: 2rem;
+}
+
+.food-contents p:not(.recipe-category){
+    padding: 1rem 0;
+}
+
+.recipe-title{
+    letter-spacing: 1px;
+    padding-bottom: 1rem;
+}
+.recipe-category{
+    background: #0e0e10;
+    font-weight: 600;
+    color: white;
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+}
 .close-button {
     width: 40px;
     height: 40px;
@@ -207,6 +234,21 @@ body{
     align-items: center;
     cursor: pointer;
     margin-left: 90%;
+}
+
+.recipe-instruction{
+    padding: 1rem 0;
+}
+.recipe-food-image img{
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    margin: 0 auto;
+    display: block;
 }
 
 .header{
@@ -228,9 +270,16 @@ button{
     background: none;
 
 }
+.noResults{
+    grid-template-columns: 1fr!important;
+    color: var(--dark);
+    font-size: 1.8rem;
+    font-weight: 600;
+    width: 100%;
+}
 
 @media screen and (min-width: 600px){
-    .meal-search-box{
+    .food-search-box{
         width: 540px;
         margin-left: auto;
         margin-right: auto;
