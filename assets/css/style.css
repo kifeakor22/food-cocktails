@@ -26,6 +26,11 @@ body{
     font-size: 1.05rem;
 }
 
+a.btn.btn-outline-success:hover {
+    background-color: #219ebc;
+    border-color: #219ebc;
+  }
+
 .title{
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -168,7 +173,7 @@ body{
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
-    color: #fb8500;
+    color: #023047;
     background: #ffb703;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
@@ -310,7 +315,7 @@ button {
 .noResults{
     grid-template-columns: 1fr!important;
     color: var(--dark);
-    font-size: 1.8rem;ß
+    font-size: 1.8rem;
     font-weight: 600;
     width: 100%;
 }
