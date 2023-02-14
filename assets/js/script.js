@@ -1,11 +1,13 @@
 let searchBtn= $("#search-btn");
 let foodList= $("#food");
-let foodinstruction= $('.food-contains');
+let foodinstruction = $('.food-contains');
 
 let recipeCloseBtn= $('closeBtn');
 
  recipeCloseBtn.on('click', () => {
-    foodinstruction.parentElement.classList.remove('showRecipe');
+    console.log()
+    foodinstruction.removeClass('showRecipe');
+
 });
 searchBtn.on('click', getfoodlist);
 foodList.on('click', getfoodRecipe);
@@ -70,8 +72,9 @@ function mealRecipe(meal){
         <div class = "recipe-food-image">
             <img src = "${meal.strMealThumb}" alt = "">
     `;
-    foodinstruction.innerHTML = html;
-    foodinstruction.parentElement.classList.add('showRecipe');
+    $(".food-details").addClass("showRecipe")
+    foodinstruction.append(html)
+    foodinstruction.addClass('showRecipe');
 }
 let cocktailDetail = function (drinkIngListItem1,drinkIngListItem2,drinkIngListItem3,drinkIngListItem4,drinkIngListItem5,
     drinkIngListItem6,drinkIngListItem7,drinkInstructionM,drinkTitleM,drinkImgM) {
