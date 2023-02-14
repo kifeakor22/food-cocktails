@@ -17,6 +17,7 @@ body{
     font-size: 1.05rem;
     line-height: 1.6;
     font-family: 'Poppins', sans-serif;
+   
 }
 
 .btn{
@@ -30,6 +31,9 @@ body{
     font-size: 2rem;
     margin-bottom: 1rem;
 }
+ .card {
+    padding-bottom: 20px;
+ }
 
 .container{
     min-height: 100vh;
@@ -305,7 +309,13 @@ button {
     background-color: #fb8500 !important;
 }
 
+<<<<<<< Updated upstream
 
+=======
+.card { 
+    padding-bottom: 20px;
+}
+>>>>>>> Stashed changes
 
 .noResults{
     grid-template-columns: 1fr!important;
