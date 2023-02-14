@@ -2,11 +2,11 @@ let searchBtn= $("#search-btn");
 let foodList= $("#food");
 let foodinstruction = $('.food-contains');
 
-let recipeCloseBtn= $('closeBtn');
+let recipeCloseBtn= $('#closeBtn');
 
  recipeCloseBtn.on('click', () => {
-    console.log()
-    foodinstruction.removeClass('showRecipe');
+     $(".food-details").removeClass("showRecipe")
+      foodinstruction.removeClass('showRecipe');
 
 });
 searchBtn.on('click', getfoodlist);
@@ -60,6 +60,7 @@ function getfoodRecipe(e){
 }
 
 function mealRecipe(meal){
+     foodinstruction.empty()
     console.log(meal);
     meal = meal[0];
     let html = `
