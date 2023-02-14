@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root{
@@ -271,18 +273,6 @@ a.btn.btn-outline-success:hover {
     margin: 0 auto; /* center the image horizontally */
     max-width: 100%; /* set a maximum width for the image */
     height: auto; /* maintain aspect ratio by setting the height to auto */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-.image {
-  display: block;
-  margin: 0 auto; /* center the image horizontally */
-  max-width: 100%; /* set a maximum width for the image */
-  height: auto; /* maintain aspect ratio by setting the height to auto */
 }
 
 .container {
