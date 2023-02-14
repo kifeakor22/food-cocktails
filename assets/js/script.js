@@ -12,7 +12,7 @@ searchBtn.on('click', getfoodlist);
 foodList.on('click', getfoodRecipe);
 
 
-/***   MEAL SEARCH PAGE ***/
+/***  START MEAL SEARCH PAGE ***/
 
 // variables for meal search input
 let mealInput = document.getElementById('search-input');
@@ -20,6 +20,7 @@ let mealInput = document.getElementById('search-input');
 mealInput.addEventListener('input', getSuggestions)
 let apiSearchParams = document.getElementsByName('api-search-param');
 let searchFood = document.querySelector('#food')
+let searchForm = document.querySelector('#meal-form')
 
 // some values needed for making the api call
 let searchType = '' //name, area, ingredient
@@ -37,6 +38,7 @@ apiSearchParams.forEach((apiSearchParam) => {
         apiSearchParam.checked = true;
         setAPIURL(apiSearchParam)
         closeAllLists();
+        clearSearchResult()
         mealInput.value = ""
     })
 })
@@ -101,10 +103,11 @@ async function getSuggestions({ target }) {
                 mealName.innerHTML = suggested[queryKey]
 
 
-                mealName.addEventListener("click", ({ target }) => {
+                mealName.addEventListener("click", async ({ target }) => {
                     mealInput.value = target.innerHTML
 
-                    displaySelectedResult(suggested) // TODO: implement the displaySearchFunction
+                    callApiWithFilterInUrl(target.innerHTML, suggested)
+
                     closeAllLists();
                 })
             })
@@ -119,13 +122,60 @@ async function getSuggestions({ target }) {
 
     }
 }
+async function callApiWithFilterInUrl(queryValue, querySuggestion) {
+    if (searchType == 'area') {
+        clearSearchResult();
+
+        apiMealURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a';
+        parameter = 'a'
+        queryKey = 'strMeal'
+
+        const areaResults = await getSuggestionsFromAPI(queryValue)
+        if (areaResults) {
+            areaResults.map(area => (
+                displaySelectedResult(area)
+            ))
+        }
+    }
+    if (searchType == 'ingredient') {
+        clearSearchResult();
+
+        apiMealURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i';
+        parameter = 'i'
+        queryKey = 'strMeal'
+
+        const ingredientResults = await getSuggestionsFromAPI(queryValue)
+        if (ingredientResults) {
+            ingredientResults.map(ingredient => (
+                displaySelectedResult(ingredient)
+            ))
+        }
+    }
+    if (searchType == 'name') {
+        clearSearchResult();
+
+        apiMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s';
+        parameter = 's'
+        queryKey = 'strMeal'
+
+        const nameResults = await getSuggestionsFromAPI(queryValue)
+        if (nameResults) {
+            nameResults.map(name => (
+                displaySelectedResult(name)
+            ))
+        }
+    }
+}
+
+// TODO: Search Button functionality
+
+// searchForm.addEventListener('submit', async (e) => {
+//     e.preventDefault()
+//     callApiWithFilterInUrl(e.target.value)
+// })
+
 function displaySelectedResult(paramObj) {
     //clear existing selection
-
-    if (searchFood.firstChild != null) {
-        clearSearchResult();
-    }
-
     let selectedResult = document.createElement('div')
     selectedResult.setAttribute('class', 'selected-item')
 
@@ -152,6 +202,7 @@ async function getSuggestionsFromAPI(inputValue) {
     if (res.ok) {
         let data = await res.json()
         let meals = await data['meals']
+        console.log(meals)
         return meals
     }
 }
@@ -168,10 +219,13 @@ function closeAllLists(element) {
 
 // clear search results
 function clearSearchResult() {
-    let results = document.querySelectorAll('.selected-item')
-    for (let i = 0; i < results.length; i++) {
-        results[i].parentNode.removeChild(results[i])
+    if (searchFood.firstChild != null) {
+        let results = document.querySelectorAll('.selected-item')
+        for (let i = 0; i < results.length; i++) {
+            results[i].parentNode.removeChild(results[i])
+        }
     }
+
 }
 
 /*execute a function when someone clicks in the document:*/
@@ -181,6 +235,8 @@ document.addEventListener("click", function (e) {
 
 // TODO: make the submit button functional - retrieve all results and display them
 // TODO: change placeholder when radio button changes
+
+/***  END MEAL SEARCH PAGE ***/
 
 //geting foodlist with given search text
 
