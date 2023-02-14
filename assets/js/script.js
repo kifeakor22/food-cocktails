@@ -15,8 +15,9 @@ foodList.on('click', getfoodRecipe);
 /***   MEAL SEARCH PAGE ***/
 
 // variables for meal search input
-let mealInput = document.getElementById('meal-input');
-let suggestionsField = document.getElementById('ul-suggestions');
+let mealInput = document.getElementById('search-input');
+// add eventlisteners
+mealInput.addEventListener('input', getSuggestions)
 let apiSearchParams = document.getElementsByName('api-search-param');
 
 // some values needed for making the api call
@@ -24,6 +25,7 @@ let searchType = '' //name, area, ingredient
 let apiMealURL = ''
 let parameter = ''
 let queryKey = ''
+let selectedValue = ''
 
 let countRadio = 0;
 apiSearchParams.forEach((apiSearchParam) => {
@@ -33,7 +35,8 @@ apiSearchParams.forEach((apiSearchParam) => {
     apiSearchParam.addEventListener('change', () => {
         apiSearchParam.checked = true;
         setAPIURL(apiSearchParam)
-
+        closeAllLists();
+        mealInput.value = ""
     })
 })
 function setAPIURL(apiSearchParam) {
@@ -60,10 +63,7 @@ function setAPIURL(apiSearchParam) {
     }
 }
 
-// add eventlisteners
-mealInput.addEventListener('input', getSuggestions)
 
-console.log(countRadio)
 //get suggestions as user types
 async function getSuggestions({ target }) {
     if (countRadio == 3) {
@@ -74,37 +74,45 @@ async function getSuggestions({ target }) {
 
     let inputData = target.value;
 
-    let suggestionBox = document.createElement('ul');
-    suggestionBox.setAttribute('id', 'autocomplete-list');
-    suggestionBox.setAttribute('class', 'autocomplete-items')
-
-    this.parentNode.appendChild(suggestionBox)
 
     if (inputData.length) {
+        let suggestionBox = document.createElement('ul');
+        suggestionBox.setAttribute('id', 'autocomplete-list');
+        suggestionBox.setAttribute('class', 'autocomplete-items')
+
+        this.parentNode.appendChild(suggestionBox)
+
         let suggestions = await getSuggestionsFromAPI(inputData)
+        if (suggestions) {
 
-        let suggestionList = suggestions.filter((suggestion) => (suggestion[queryKey].toLowerCase().includes(inputData)))
-
-        console.log(suggestionList)
-        if (suggestionList != null) {
+            let suggestionList = suggestions.filter((suggestion) => (suggestion[queryKey].toLowerCase().includes(inputData)))
             suggestionList.map(suggested => {
                 let suggestionItem = document.createElement('li');
                 suggestionBox.appendChild(suggestionItem);
                 suggestionItem.setAttribute('class', 'suggestion-item')
 
-                let mealName = document.createElement('h4')
+                let mealName = document.createElement('p')
                 let mealImg = document.createElement('img')
 
                 suggestionItem.appendChild(mealName);
+                suggestionItem.style.borderBottom = '1px solid blue';
 
                 mealName.innerHTML = suggested[queryKey]
+
+                mealName.addEventListener("click", ({ target }) => {
+                    mealInput.value = target.innerHTML
+                    selectedValue = target.innerHTML
+
+                    // displaySearchResult(selectedValue, suggested) // TODO: implement the displaySearchFunction
+                    closeAllLists();
+                })
             })
         } else {
             let suggestionItem = document.createElement('li');
             suggestionBox.appendChild(suggestionItem);
             suggestionItem.setAttribute('class', 'suggestion-item')
 
-            suggestionItem.innerHTML = 'No item in our DB'
+            suggestionBox.innerHTML = '<p> No item in our DB </p>'
 
         }
 
@@ -113,7 +121,6 @@ async function getSuggestions({ target }) {
 
 async function getSuggestionsFromAPI(inputValue) {
     let newURL = new URL(apiMealURL);
-    console.log(newURL)
 
     newURL.searchParams.set(parameter, inputValue)
 
@@ -128,7 +135,17 @@ async function getSuggestionsFromAPI(inputValue) {
 
 }
 
-// TODO: Clear suggestions when user selects new radio button
+function closeAllLists(element) {
+
+    var x = document.querySelectorAll('.autocomplete-items')
+    for (let i = 0; i < x.length; i++) {
+        if (element != x[i] && element != mealInput) {
+            x[i].parentNode.removeChild(x[i]);
+        }
+    }
+
+}
+
 // TODO: make each suggestion item clickable and retrieve that data
 // TODO: make the submit button functional - retrieve all results and display them
 

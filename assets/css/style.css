@@ -424,9 +424,7 @@ h4 {
 /******** meal page ******/
 #meal-form {
   position: relative;
-  display: flex;
   width: 100%;
-  gap: 5px;
   margin: 10px;
 }
 #meal-input {
@@ -447,12 +445,19 @@ h4 {
 #autocomplete-list {
   background-color: white;
   /* border-top: #f1f1f1; */
-  width: 18.8rem;
-  height: 30rem;
+  width: 20rem;
+  height: 5rem;
   position: absolute;
-  top: 80px;
-  left: 0;
+  top:198px;
+  left: 17px;
   overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+.suggestion-item {
+  text-align: left;
 }
 /* #ul-suggestions {
   height: 500px;

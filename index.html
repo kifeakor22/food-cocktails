@@ -1,91 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="./assets/css/style.css"/>
-    <title>Food && cocktails</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <title>Food && cocktails</title>
 </head>
+
 <body>
 
-    <header class="header">
-      <a class="navbar" href="">
-        <img src="./assets/image/Capture (2).png" width="250" height="140" class="image" alt="">     
-      </a>
-    </header>
-    <div class="jumbotron">
-      <h1 class="display-4">Welcome to Food and Cocktails!</h1>
-      <p class="lead">Want to find a recipe? Learn how to make a new cocktail?</p>
-      <hr class="my-4">
+  <header class="header">
+    <a class="navbar" href="">
+      <img src="./assets/image/Capture (2).png" width="250" height="140" class="image" alt="">
+    </a>
+  </header>
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to Food and Cocktails!</h1>
+    <p class="lead">Want to find a recipe? Learn how to make a new cocktail?</p>
+    <hr class="my-4">
+  </div>
+  <section class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card bg-light">
+          <a class="btn btn-outline-success" href="./food.html">
+            <div class="card-body bg-light">
+              <img src="./assets/image/kitchen.png" height="400" width="350" class="image">
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-">
+          <div class="card bg-light">
+            <a class="btn btn-outline-success" data-toggle="modal" data-target="#cocktailModal">
+              <div class="card-body bg-light">
+                <img src="./assets/image/Cocktails (1).png" class="image" height="400" width="350" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <section class="container">
-        <div class="row">
-            <div class="col-lg-6">
-              <div class="card bg-light">
-                <a class="btn btn-outline-success" href="./food.html">
-                    <div class="card-body bg-light">
-                      <img src="./assets/image/kitchen.png" height="400" width="350" class="image"> 
-                    </div>   
-                </a>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!--End of food modal -->
+
+    <!--modal for cocktails-->
+    <div class="modal fade" id="cocktailModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Food-Cocktails</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h3>What type of cocktail are you in the mood for?</h3>
+            <form>
+              <div class="form-group topForm">
+                <label for="drinkName">Search by name</label>
+                <input type="text" class="form-control" id="drinkByName" placeholder="Name of cocktail eg zombie">
               </div>
-              
-            <div class="col-lg-">
-              <div class="card bg-light">
-                <a class="btn btn-outline-success"data-toggle="modal" data-target="#cocktailModal">
-                  <div class="card-body bg-light">
-                  <img src="./assets/image/Cocktails (1).png" class="image" height="400" width="350"/>
-                  </div>
-                </a>
-              </div>
-            </div>
+              <div class="form-group">
+                <div class="form-group topForm">
+                  <label for="drinkIng">Search by ingredient</label>
+                  <input type="text" class="form-control" id="drinkByIngredient"
+                    placeholder="Name of ingredient. eg Vodka or whisky or rum">
+                </div>
+
+                <div class="form-group topForm">
+                  <button type="text" class="form-control" id="randomDrink">Feeling Lucky? click Me for a random
+                    drink</button>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary searchCocktail">Search for cocktail</button>
           </div>
         </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="container">
+      <div class="row" id="displayDrink">
 
-          <!--Modal  for Food start -->
-          <div class="modal fade" id="foodModal" tabindex="-1" role="dialog" aria-labelledby="foodModalLabel"aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h2 class="modal-title">Food-Cocktails</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <h3>What would you like to cook today?</h3>
-                  <p>Please search one option at a time</p>
-                  <form id="foodForm">
-                    <div class="form-group topForm">
-                      <label for="ingredientName">Search by Ingredients</label>
-                      <input type="text" class="form-control" id="mealByIngredient" placeholder="Name of ingredient. eg Chicken thighs">
-                    </div>
-                    <div class="form-group">
-                       <div class="form-group topForm">
-                      <label for="projectName">Search by origin of food</label>
-                      <input type="text" class="form-control" id="mealByOrigin" placeholder="Chines, Italian, Spanish, Thai">
-                    </div> 
-                      <div class="form-group topForm">
-                      <label for="foodName">Search by Name of dish?</label>
-                      <input type="text" class="form-control" id="mealByName" placeholder="Name of dish? eg Fried rice">
-                    </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-secondary searchFood">Search for meal</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--End of food modal -->
-
-        <!--modal for cocktails-->
-        <div class="modal fade" id="cocktailModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"aria-hidden="true">
+        <<<<<<< HEAD <!--modal for cocktails-->
+          <div class="modal fade" id="cocktailModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -99,60 +110,87 @@
                   <form id="getCocktailForm">
                     <div class="form-group topForm">
                       <label for="drinkName">Search by name or ingredient</label>
-                      <input type="text" class="form-control" id="drinkByName" placeholder="Name of cocktail eg zombie or ingredient eg Rum">
+                      <input type="text" class="form-control" id="drinkByName"
+                        placeholder="Name of cocktail eg zombie or ingredient eg Rum">
                     </div>
-                      <div class="form-group topForm">
-                      <button type="text" class="form-control" id="randomDrink">Feeling Lucky? click Me for a random drink</button>
+                    <div class="form-group topForm">
+                      <button type="text" class="form-control" id="randomDrink">Feeling Lucky? click Me for a random
+                        drink</button>
                     </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-secondary searchCocktail">Search for cocktail</button>
-                  </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary searchCocktail">Search for cocktail</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="container">
-          <div class="row" id="displayDrink">
+      </div>
+    </div>
+    <div class="container">
+      <div class="row" id="displayDrink">
 
+      </div>
+    </div>
+
+    <!-- random drink modal-->
+    <div class="modal fade" id="drinkModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Food-Cocktails</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="drinkBody"></div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
-        
-<!-- random drink modal-->
-        <div class="modal fade" id="drinkModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h2 class="modal-title">Food-Cocktails</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div id="drinkBody"></div>
-                  
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+    =======
+    </div>
+    </div>
+
+    <!-- random drink modal-->
+    <div class="modal fade" id="drinkModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Food-Cocktails</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="drinkBody"></div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            >>>>>>> e7393fd (feat: clear suggestions when option is choosen)
           </div>
         </div>
+      </div>
+    </div>
+    </div>
+    </div>
 
 
 
 
 
 
-    </section>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-<script src="./assets/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="./assets/js/script.js"></script>
 
 </body>
 
