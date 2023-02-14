@@ -1,22 +1,23 @@
-const searchBtn=document.getElementById("search-btn");
-const foodList=document.getElementById("food");
-const foodinstruction=document.querySelector('.food-contains');
+let searchBtn= $("#search-btn");
+let foodList= $("#food");
+let foodinstruction= $('.food-contains');
 
-const recipeCloseBtn=document.getElementById('closeBtn');
+let recipeCloseBtn= $('closeBtn');
 
-
-searchBtn.addEventListener('click', getfoodlist);
-foodList.addEventListener('click', getfoodRecipe);
-recipeCloseBtn.addEventListener('click', () => {
+ recipeCloseBtn.on('click', () => {
     foodinstruction.parentElement.classList.remove('showRecipe');
 });
+searchBtn.on('click', getfoodlist);
+foodList.on('click', getfoodRecipe);
+
+
 
 
 
 //geting foodlist with given search text
 
 function getfoodlist(){
-    let inputSearch=document.getElementById('search-input').value.trim();
+    let inputSearch= $('#search-input').val().trim();
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputSearch}`).then(response => response.json())
     .then(data =>{
         let html = "";
@@ -34,13 +35,13 @@ function getfoodlist(){
                     </div>
                 `;
             });
-            foodList.classList.remove('.noResults');
+            foodList.removeClass('.noResults');
         } else{
             html = "Sorry, we didn't find any food!";
             foodList.classList.add('.noResults');
         }
 
-        foodList.innerHTML = html;
+        foodList.append(html)
     })
 
   
@@ -186,4 +187,5 @@ let getCocktailByName = function() {
 // call the getCocktailByName function when .searchCoctail is clicked
 $(".searchCocktail").on("click", getCocktailByName) 
  $("drinkByName").empty()
-   
+
+
