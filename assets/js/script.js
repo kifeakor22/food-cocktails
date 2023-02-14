@@ -1,7 +1,6 @@
 let searchBtn= $("#search-btn");
 let foodList= $("#food");
 let foodinstruction = $('.food-contains');
-
 let recipeCloseBtn= $('#closeBtn');
 
  recipeCloseBtn.on('click', () => {
@@ -101,6 +100,7 @@ let cocktailDetail = function (drinkIngListItem1,drinkIngListItem2,drinkIngListI
 
 // get random cocktail
     let randomCocktail = $("#randomDrink").on("click", function(event){
+        
         event.preventDefault()
         $.ajax({
             url:"https://www.thecocktaildb.com/api/json/v1/1/random.php",
@@ -188,8 +188,14 @@ let getCocktailByName = function() {
 
 
 
+
 // call the getCocktailByName function when .searchCoctail is clicked
 $(".searchCocktail").on("click", getCocktailByName) 
- $("drinkByName").empty()
+
+// code to clear modal form everytime for fresh input
+$('#cocktailModal').on('shown.bs.modal', function () {
+  $('#getCocktailForm')[0].reset();
+});
+
 
 

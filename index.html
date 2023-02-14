@@ -21,9 +21,9 @@
       <p class="lead">Want to find a recipe? Learn how to make a new cocktail?</p>
       <hr class="my-4">
     </div>
-    <section>
-        <div class="row  container mx-auto">
-            <div class="col-sm-6">
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-6">
               <div class="card bg-light">
                 <a class="btn btn-outline-success" href="./food.html">
                     <div class="card-body bg-light">
@@ -96,17 +96,11 @@
                 </div>
                 <div class="modal-body">
                   <h3>What type of cocktail are you in the mood for?</h3>
-                  <form>
+                  <form id="getCocktailForm">
                     <div class="form-group topForm">
-                      <label for="drinkName">Search by name</label>
-                      <input type="text" class="form-control" id="drinkByName" placeholder="Name of cocktail eg zombie">
+                      <label for="drinkName">Search by name or ingredient</label>
+                      <input type="text" class="form-control" id="drinkByName" placeholder="Name of cocktail eg zombie or ingredient eg Rum">
                     </div>
-                    <div class="form-group">
-                       <div class="form-group topForm">
-                      <label for="drinkIng">Search by ingredient</label>
-                      <input type="text" class="form-control" id="drinkByIngredient" placeholder="Name of ingredient. eg Vodka or whisky or rum">
-                    </div>
-                      
                       <div class="form-group topForm">
                       <button type="text" class="form-control" id="randomDrink">Feeling Lucky? click Me for a random drink</button>
                     </div>
