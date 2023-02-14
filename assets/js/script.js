@@ -19,6 +19,7 @@ let mealInput = document.getElementById('search-input');
 // add eventlisteners
 mealInput.addEventListener('input', getSuggestions)
 let apiSearchParams = document.getElementsByName('api-search-param');
+let searchFood = document.querySelector('#food')
 
 // some values needed for making the api call
 let searchType = '' //name, area, ingredient
@@ -92,18 +93,18 @@ async function getSuggestions({ target }) {
                 suggestionItem.setAttribute('class', 'suggestion-item')
 
                 let mealName = document.createElement('p')
-                let mealImg = document.createElement('img')
+
 
                 suggestionItem.appendChild(mealName);
                 suggestionItem.style.borderBottom = '1px solid blue';
 
                 mealName.innerHTML = suggested[queryKey]
 
+
                 mealName.addEventListener("click", ({ target }) => {
                     mealInput.value = target.innerHTML
-                    selectedValue = target.innerHTML
 
-                    // displaySearchResult(selectedValue, suggested) // TODO: implement the displaySearchFunction
+                    displaySelectedResult(suggested) // TODO: implement the displaySearchFunction
                     closeAllLists();
                 })
             })
@@ -118,10 +119,32 @@ async function getSuggestions({ target }) {
 
     }
 }
+function displaySelectedResult(paramObj) {
+    //clear existing selection
 
+    if (searchFood.firstChild != null) {
+        clearSearchResult();
+    }
+
+    let selectedResult = document.createElement('div')
+    selectedResult.setAttribute('class', 'selected-item')
+
+    let selectedResultImage = document.createElement('img')
+    selectedResultImage.setAttribute('class', 'selected-img')
+    let selectedResultName = document.createElement('p');
+
+    searchFood.appendChild(selectedResult)
+    selectedResult.appendChild(selectedResultImage)
+    selectedResult.appendChild(selectedResultName)
+
+    selectedResultName.innerHTML = paramObj['strMeal']
+    selectedResultImage.src = paramObj['strMealThumb']
+
+
+}
+// api call for suggestions is made here
 async function getSuggestionsFromAPI(inputValue) {
     let newURL = new URL(apiMealURL);
-
     newURL.searchParams.set(parameter, inputValue)
 
     const res = await fetch(newURL)
@@ -130,24 +153,34 @@ async function getSuggestionsFromAPI(inputValue) {
         let data = await res.json()
         let meals = await data['meals']
         return meals
-
     }
-
 }
 
+// close the suggestion box
 function closeAllLists(element) {
-
-    var x = document.querySelectorAll('.autocomplete-items')
+    let x = document.querySelectorAll('.autocomplete-items')
     for (let i = 0; i < x.length; i++) {
         if (element != x[i] && element != mealInput) {
             x[i].parentNode.removeChild(x[i]);
         }
     }
-
 }
 
-// TODO: make each suggestion item clickable and retrieve that data
+// clear search results
+function clearSearchResult() {
+    let results = document.querySelectorAll('.selected-item')
+    for (let i = 0; i < results.length; i++) {
+        results[i].parentNode.removeChild(results[i])
+    }
+}
+
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+
 // TODO: make the submit button functional - retrieve all results and display them
+// TODO: change placeholder when radio button changes
 
 //geting foodlist with given search text
 
