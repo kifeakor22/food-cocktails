@@ -10,44 +10,41 @@
     <title>Food && cocktails</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-light bg-dark">
-            <a class="navbar-brand" href="#">
-              <img src="./assets/image/Capture (2).png"  height="150" class="image" alt="">     
-            </a>
-        </nav>
 
+    <header class="header">
+      <a class="navbar" href="">
+        <img src="./assets/image/Capture (2).png" width="250" height="140" class="image" alt="">     
+      </a>
     </header>
     <div class="jumbotron">
       <h1 class="display-4">Hello..... Welcome to Food and Cocktails!</h1>
       <p class="lead">Ever wondered what meal to cook or how to make a particular cocktail for your friends? ... well look no further</p>
       <hr class="my-4">
       <p>Select one of the options below to get startedt</p>
-  <a class="btn btn-outline btn-lg" href="#" role="button">Learn more</a>
-</div>
+      <a class="btn btn-outline btn-lg" href="#" role="button">Learn more</a>
+    </div>
     <section>
         <div class="row  container mx-auto">
             <div class="col-sm-6">
-              <div class="card">
-                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#foodModal">
-                    <div class="card-body bg-light" >
-                         <h2>Food</h2>
-                        <img src="./assets/image/kitchen.png" height="400" width="350" class="image">
-                    </div>
-                </button>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <button class="btn btn-outline-success"data-toggle="modal" data-target="#cocktailModal">
+              <div class="card bg-light">
+                <a class="btn btn-outline-success" href="./food.html">
                     <div class="card-body bg-light">
-                      <h2>Cocktails</h2>
-                        <img src="./assets/image/Cocktails (1).png" height="400" width="350" class="image">    
-                    </div>
-                </button>
+                      <img src="./assets/image/kitchen.png" height="400" width="350"> 
+                    </div>   
+                </a>
+              </div>
+              
+            <div class="col-lg-">
+              <div class="card bg-light">
+                <a class="btn btn-outline-success"data-toggle="modal" data-target="#cocktailModal">
+                  <div class="card-body bg-light">
+                  <img src="./assets/image/Cocktails (1).png" class="image-fluid" height="400" width="350"/>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
+        </div>
 
           <!--Modal  for Food start -->
           <div class="modal fade" id="foodModal" tabindex="-1" role="dialog" aria-labelledby="foodModalLabel"aria-hidden="true">
@@ -126,6 +123,32 @@
             </div>
           </div>
         </div>
+        <div class="container">
+          <div class="row" id="displayDrink">
+
+          </div>
+        </div>
+        
+<!-- random drink modal-->
+        <div class="modal fade" id="drinkModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title">Food-Cocktails</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div id="drinkBody"></div>
+                  
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
@@ -133,7 +156,7 @@
 
 
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 

@@ -1,50 +1,195 @@
+let searchBtn= $("#search-btn");
+let foodList= $("#food");
+let foodinstruction = $('.food-contains');
 
-// variables for meal search input
+let recipeCloseBtn= $('#closeBtn');
 
-// variables for cocktail search inputs to use later 
+ recipeCloseBtn.on('click', () => {
+     $(".food-details").removeClass("showRecipe")
+      foodinstruction.removeClass('showRecipe');
 
-let drinkByName = $("#drinkByName")
-let drinkByIngredient = $("#drinkByIngredient")
-let randomDrink = $("#randomDrink")
-
-
-// function to get user input that will be used to build query parameters
-// depending on what the user searched for 
+});
+searchBtn.on('click', getfoodlist);
+foodList.on('click', getfoodRecipe);
 
 
-let searchFood = function() {
-    event.preventDefault()
-    const foodUrl = "www.themealdb.com/api/json/v1/1/lookup.php?"
-    var mealByIngredient = $("#mealByIngredient").val().trim()
-    var mealByName = $("#mealByName").val().trim()
-    var mealByOrigin = $("#mealByOrigin").val().trim()
-    if(mealByIngredient){
-        var queryParam = {"i": mealByIngredient}
-        console.log(queryParam)
-    }else if(mealByName) {
-        var queryParam = {"s": mealByName }
-        console.log(queryParam)
 
-    }else if(mealByOrigin) {
-        var queryParam = {"a" : mealByOrigin}
-        console.log(queryParam)
-    }else {
-        alert("please select at least one meal")
-    }
-    $('#foodModal').modal('hide')
+
+
+//geting foodlist with given search text
+
+function getfoodlist(){
+    let inputSearch= $('#search-input').val().trim();
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputSearch}`).then(response => response.json())
+    .then(data =>{
+        let html = "";
+        if(data.meals){
+            data.meals.forEach(meal => {
+                html += `
+                    <div class = "food-item" data-id = "${meal.idMeal}">
+                        <div class = "food-img">
+                            <img src = "${meal.strMealThumb}" alt = "food">
+                        </div>
+                        <div class = "food-name">
+                            <h3>${meal.strMeal}</h3>
+                            <a href = "#" class = "recipe-btn">Get Recipe</a>
+                        </div>
+                    </div>
+                `;
+            });
+            foodList.removeClass('.noResults');
+        } else{
+            html = "Sorry, we didn't find any food!";
+            foodList.classList.add('.noResults');
+        }
+
+        foodList.append(html)
+    })
+
+  
 }
 
-$(".searchFood").on("click",searchFood)
+function getfoodRecipe(e){
+    e.preventDefault();
+    if(e.target.classList.contains('recipe-btn')){
+        let foodItem = e.target.parentElement.parentElement;
+        fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${foodItem.dataset.id}`)
+        .then(response => response.json())
+        .then(data => mealRecipe(data.meals));
+    }
+}
+
+function mealRecipe(meal){
+     foodinstruction.empty()
+    console.log(meal);
+    meal = meal[0];
+    let html = `
+        <h2 class = "recipe-title">${meal.strMeal}</h2>
+        <p class = "recipe-category">${meal.strCategory}</p>
+        <div class = "recipe-instruction">
+            <h3>Instructions:</h3>
+            <p>${meal.strInstructions}</p>
+        </div>
+        <div class = "recipe-food-image">
+            <img src = "${meal.strMealThumb}" alt = "">
+    `;
+    $(".food-details").addClass("showRecipe")
+    foodinstruction.append(html)
+    foodinstruction.addClass('showRecipe');
+}
+let cocktailDetail = function (drinkIngListItem1,drinkIngListItem2,drinkIngListItem3,drinkIngListItem4,drinkIngListItem5,
+    drinkIngListItem6,drinkIngListItem7,drinkInstructionM,drinkTitleM,drinkImgM) {
+    var drinkIngredientList =$("<ul>").addClass("modal-body")
+    var ingTitle =$("<li>").text("Ingredients")
+    var drinkIngListItem1 = $("<li>").addClass("modal-body").text(drinkIngListItem1)
+    var drinkIngListItem2 = $("<li>").addClass("modal-body").text(drinkIngListItem2)
+    var drinkIngListItem3 = $("<li>").addClass("modal-body").text(drinkIngListItem3)
+    var drinkIngListItem4 = $("<li>").addClass("modal-body").text(drinkIngListItem4)
+    var drinkIngListItem5 = $("<li>").addClass("modal-body").text(drinkIngListItem5)
+    var drinkIngListItem6 = $("<li>").addClass("modal-body").text(drinkIngListItem6)
+    var drinkIngListItem7 = $("<li>").addClass("modal-body").text(drinkIngListItem7)
+    drinkIngredientList.append(ingTitle,drinkIngListItem1,drinkIngListItem2,drinkIngListItem3,drinkIngListItem4,
+        drinkIngListItem5,drinkIngListItem6,drinkIngListItem7)       
+    var modalBody =$("<div>").addClass("modal-body")
+    var modalTitle = $("<h2>").addClass("modal-title").text(drinkTitleM)
+    var modalImg =  $("<img>").addClass("modal-body img-fluid").attr("src", drinkImgM)
+    modalBody.append(modalTitle,modalImg,drinkIngredientList,drinkInstructionM)
+    $("#drinkBody").html(modalBody)   
+
+}
+
+
+// get random cocktail
+    let randomCocktail = $("#randomDrink").on("click", function(event){
+        event.preventDefault()
+        $.ajax({
+            url:"https://www.thecocktaildb.com/api/json/v1/1/random.php",
+             method:'GET',
+            }).then(function(response){
+                $("#displayDrink").empty()
+                var drink = response.drinks
+                console.log(drink[0].strDrink)
+                var drinkCard = $("<div>").addClass("card").attr("style", "width: 18rem")
+                var drinkImgM = drink[0].strDrinkThumb
+                var drinkImg =$("<img>").addClass("card-img-top").attr("src", `${drinkImgM}/preview`)
+                var drinkBody = $("<div>").addClass("card-body")
+                var drinkTitleM = drink[0].strDrink
+                var drinkTitle = $("<button>").addClass("card-title btn btn-secondary").text(drinkTitleM)
+                var drinkInstructionM = drink[0].strInstructions
+                var drinkInstruction = $("<h4>").addClass("card-body").text(drinkInstructionM)
+                drinkCard.append(drinkImg,drinkBody,drinkTitle)
+                $("#displayDrink").append(drinkCard)
+                $("#cocktailModal").modal("hide")
+                $("#drinkBody").empty()  
+                var drinkIngListItem1 = drink[0].strIngredient1
+                var drinkIngListItem2 = drink[0].strIngredient2
+                var drinkIngListItem3 = drink[0].strIngredient3
+                var drinkIngListItem4 = drink[0].strIngredient4
+                var drinkIngListItem5 = drink[0].strIngredient5
+                var drinkIngListItem6 = drink[0].strIngredient6
+                var drinkIngListItem7 = drink[0].strIngredient7
+                drinkTitle.attr("data-toggle", "modal")
+                drinkTitle.attr("data-target", "#drinkModal") 
+                cocktailDetail(drinkIngListItem1,drinkIngListItem2,drinkIngListItem3,drinkIngListItem4,drinkIngListItem5,
+                    drinkIngListItem6,drinkIngListItem7,drinkInstructionM,drinkTitleM,drinkImgM)
+            })
+         })
+
+
+let apiURL='https://www.thecocktaildb.com/api/json/v1/1/search.php?'
+let getCocktailByName = function() {
+    var drinkByName = $("#drinkByName").val().trim()
+    var queryParam = {"s": drinkByName}
+    var queryURL = apiURL + $.param(queryParam)
+    console.log(queryURL)
+    $.ajax({
+    url: queryURL,
+    method: "GET"
+}).then(function(data){
+    var cocktails = data.drinks;
+    $("#displayDrink").empty();
+    cocktails.forEach(function(drink){  
+        var drinkImgM = drink.strDrinkThumb;
+        var drinkTitleM = drink.strDrink;
+        var drinkIngListItem1 = drink.strIngredient1;
+        var drinkIngListItem2 = drink.strIngredient2;
+        var drinkIngListItem3 = drink.strIngredient3;
+        var drinkIngListItem4 = drink.strIngredient4;
+        var drinkIngListItem5 = drink.strIngredient5;
+        var drinkIngListItem6 = drink.strIngredient6;
+        var drinkIngListItem7 = drink.strIngredient7;
+        var drinkInstructionM = drink.strInstructions;
+        var cocktailCard = $("<div>").addClass("card col-lg-4 col-md-4").attr("style", "width: 18rem");
+        var cocktailImg = $("<img>").addClass("card-img-top").attr("src",drinkImgM);
+        var cocktailBody = $("<div>").addClass("card-body");
+        var cocktailName = $("<h3>").addClass("card-title").text(drinkTitleM);
+        var drinkDetails = $("<a>").addClass("btn btn-secondary details").text("Click here for details");
+        cocktailCard.append(cocktailImg, cocktailBody, cocktailName, drinkDetails); 
+        $("#displayDrink").append(cocktailCard);
+        $("#cocktailModal").modal("hide");
+        drinkDetails.attr("data-toggle", "modal");
+        drinkDetails.attr("data-target", "#drinkModal");
+        // add a data attribute to drink details to hold drink info for each drink in the loop
+        drinkDetails.data("drink-info", {
+            drinkTitle: drinkTitleM,
+            drinkImg: drinkImgM,
+            drinkIngList: [drinkIngListItem1, drinkIngListItem2, drinkIngListItem3, drinkIngListItem4, drinkIngListItem5, drinkIngListItem6, drinkIngListItem7],
+            drinkInstruction: drinkInstructionM});
+        // add an event listener on the DOM to listen for click events on buttons that belong to details class    
+        $(document).on("click", ".details", function() {
+        var drinkInfo = $(this).data("drink-info");
+        cocktailDetail(drinkInfo.drinkIngList[0],drinkInfo.drinkIngList[1],drinkInfo.drinkIngList[2],drinkInfo.drinkIngList[3],drinkInfo.drinkIngList[4],drinkInfo.drinkIngList[5],drinkInfo.drinkIngList[6],drinkInfo.drinkInstruction,drinkInfo.drinkTitle,drinkInfo.drinkImg);
+    });
+    });
+    
+});
+}
 
 
 
-queryURL='https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
 
-//$.ajax({
-  //  url:queryURL,
- //   method:'GET',
-//}).then(function(response){
-    //console.log(response);
-//})
+// call the getCocktailByName function when .searchCoctail is clicked
+$(".searchCocktail").on("click", getCocktailByName) 
+ $("drinkByName").empty()
 
 
