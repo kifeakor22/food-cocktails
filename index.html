@@ -13,23 +13,36 @@
 
 <body>
 
-  <header class="header">
-    <a class="navbar" href="">
-      <img src="./assets/image/Capture (2).png" width="250" height="140" class="image" alt="">
-    </a>
-  </header>
-  <div class="jumbotron">
-    <h1 class="display-4">Welcome to Food and Cocktails!</h1>
-    <p class="lead">Want to find a recipe? Learn how to make a new cocktail?</p>
-    <hr class="my-4">
-  </div>
-  <section class="container">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card bg-light">
-          <a class="btn btn-outline-success" href="./pages/food.html">
-            <div class="card-body bg-light">
-              <img src="./assets/image/kitchen.png" height="400" width="350" class="image">
+    <header class="header">
+      <a class="navbar" href="">
+        <img src="./assets/image/Capture (2).png" width="250" height="140" class="image" alt="">     
+      </a>
+    </header>
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome to Food and Cocktails!</h1>
+      <p class="lead">Want to find a recipe or learn how to make a new cocktail?</p>
+      <p class="Lead"> Click below to find out</p>
+      <hr class="my-4">
+    </div>
+    <section class="container">
+        <div class="row">
+            <div class="col-lg-6">
+              <a class="btn btn-outline-success" href="./pages/food.html">
+                <div class="card bg-light">
+                  <div class="card-body bg-light">
+                    <img src="./assets/image/kitchen.png" height="400" width="350" class="image">
+                  </div>
+                </div>
+              </a>
+            </div>   
+            <div class="col-lg-6">
+              <a class="btn btn-outline-success"data-toggle="modal" data-target="#cocktailModal">
+              <div class="card bg-light">
+                  <div class="card-body bg-light">
+                  <img src="./assets/image/Cocktails (1).png" class="image" height="400" width="350"/>
+                  </div>
+              </div>
+              </a>
             </div>
           </a>
         </div>
@@ -149,11 +162,14 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        </div>
+        <div class="container">
+          <div class="row" id="displayDrink">
           </div>
         </div>
       </div>
     </div>
-    =======
     </div>
     </div>
 
@@ -179,11 +195,6 @@
     </div>
     </div>
     </div>
-
-
-
-
-
 
   </section>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

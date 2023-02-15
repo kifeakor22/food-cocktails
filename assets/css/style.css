@@ -30,8 +30,8 @@ body{
 }
 
 a.btn.btn-outline-success:hover {
-    background-color: #219ebc;
-    border-color: #219ebc;
+    background-color: var(--dark);
+    border-color: var(--dark);
   }
 
 .title{
@@ -40,6 +40,8 @@ a.btn.btn-outline-success:hover {
 }
  .card {
     padding-bottom: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 21px -12px rgba(205, 5, 5, 0.79);
  }
 
 .container{
@@ -73,8 +75,8 @@ a.btn.btn-outline-success:hover {
     font-size: 1.1rem;
     font-family: inherit;
     outline: 0;
-    border: 1px solid var(--secondary);
-    color: var(--secondary);
+    border: 1px solid var(--dark);
+    color: var(--dark);
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
 }
@@ -268,6 +270,10 @@ a.btn.btn-outline-success:hover {
     background-color: #023047;
     margin-top: 0%;
 }
+#displayDrink {
+    display: flex;
+    justify-content: center;
+}
 
 .image{
     margin-left: auto;
@@ -318,6 +324,9 @@ button {
     background-color: #fb8500 !important;
 }
 
+.card { 
+    padding-bottom: 20px;
+}
 
 .noResults{
     grid-template-columns: 1fr!important;
