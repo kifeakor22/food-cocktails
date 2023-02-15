@@ -12,12 +12,14 @@ searchBtn.on('click', getfoodlist);
 foodList.on('click', getfoodRecipe);
 
 
-/***  START MEAL SEARCH PAGE ***/
+/**************************  START MEAL SEARCH PAGE *************************/
 
 // variables for meal search input
 let mealInput = document.getElementById('search-input');
+
 // add eventlisteners
 mealInput.addEventListener('input', getSuggestions)
+
 let apiSearchParams = document.getElementsByName('api-search-param');
 let searchFood = document.querySelector('#food')
 let searchForm = document.querySelector('#meal-form')
@@ -104,7 +106,7 @@ async function getSuggestions({ target }) {
 
 
                 mealName.addEventListener("click", async ({ target }) => {
-                    mealInput.value = target.innerHTML
+                    mealInput.value = target.innerHTML.trim()
 
                     callApiWithFilterInUrl(target.innerHTML, suggested)
 
@@ -130,7 +132,7 @@ async function callApiWithFilterInUrl(queryValue, querySuggestion) {
         parameter = 'a'
         queryKey = 'strMeal'
 
-        const areaResults = await getSuggestionsFromAPI(queryValue)
+        const areaResults = await getSuggestionsFromAPI(queryValue.trim())
         if (areaResults) {
             areaResults.map(area => (
                 displaySelectedResult(area)
@@ -144,7 +146,7 @@ async function callApiWithFilterInUrl(queryValue, querySuggestion) {
         parameter = 'i'
         queryKey = 'strMeal'
 
-        const ingredientResults = await getSuggestionsFromAPI(queryValue)
+        const ingredientResults = await getSuggestionsFromAPI(queryValue.trim())
         if (ingredientResults) {
             ingredientResults.map(ingredient => (
                 displaySelectedResult(ingredient)
@@ -158,7 +160,7 @@ async function callApiWithFilterInUrl(queryValue, querySuggestion) {
         parameter = 's'
         queryKey = 'strMeal'
 
-        const nameResults = await getSuggestionsFromAPI(queryValue)
+        const nameResults = await getSuggestionsFromAPI(queryValue.trim())
         if (nameResults) {
             nameResults.map(name => (
                 displaySelectedResult(name)
@@ -167,11 +169,11 @@ async function callApiWithFilterInUrl(queryValue, querySuggestion) {
     }
 }
 
-// TODO: Search Button functionality
-
 // searchForm.addEventListener('submit', async (e) => {
 //     e.preventDefault()
-//     callApiWithFilterInUrl(e.target.value)
+//     let searchReturns = await getSuggestionsFromAPI(e.target.value)
+
+
 // })
 
 function displaySelectedResult(paramObj) {
@@ -190,7 +192,30 @@ function displaySelectedResult(paramObj) {
     selectedResultName.innerHTML = paramObj['strMeal']
     selectedResultImage.src = paramObj['strMealThumb']
 
+    selectedResult.addEventListener('click', () => {
+        foodinstruction.empty()
+        let html = `
+        <div class='modal-container'>
+            <div class='modal-container-headings'>
+                <h2 class = "recipe-title">${paramObj['strMeal']}</h2>
+                <p class = "recipe-category">${paramObj['strCategory']}</p>
+            </div>
+        <div class = "recipe-instruction">
+            <h4>Instructions:</h4>
+            <p>${paramObj['strInstructions']}</p>
+        </div>
+        <div class = "recipe-food-image">
+            <img src = "${paramObj['strMealThumb']}" alt = "">
+        </div>
 
+    `;
+        $(".food-details").addClass("showRecipe")
+        foodinstruction.append(html)
+        foodinstruction.addClass('showRecipe');
+
+        closeAllLists()
+
+    })
 }
 // api call for suggestions is made here
 async function getSuggestionsFromAPI(inputValue) {
@@ -202,7 +227,6 @@ async function getSuggestionsFromAPI(inputValue) {
     if (res.ok) {
         let data = await res.json()
         let meals = await data['meals']
-        console.log(meals)
         return meals
     }
 }
@@ -236,11 +260,12 @@ document.addEventListener("click", function (e) {
 // TODO: make the submit button functional - retrieve all results and display them
 // TODO: change placeholder when radio button changes
 
-/***  END MEAL SEARCH PAGE ***/
+/*************************************************  END MEAL SEARCH PAGE ***************************************/
 
 //geting foodlist with given search text
 
-function getfoodlist() {
+function getfoodlist(e) {
+    e.preventDefault()
     let inputSearch = $('#search-input').val().trim();
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputSearch}`).then(response => response.json())
         .then(data => {
