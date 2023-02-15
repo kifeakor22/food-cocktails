@@ -306,7 +306,7 @@ function getfoodlist(e) {
 
 
 //Get web Data
-function getfoodRecipe(e){
+function getfoodRecipe(e) {
     e.preventDefault();
     if (e.target.classList.contains('recipe-btn')) {
         let foodItem = e.target.parentElement.parentElement;
@@ -317,12 +317,12 @@ function getfoodRecipe(e){
 }
 
 
-   
+
 // Display instruction
-function mealRecipe(meal){
+function mealRecipe(meal) {
     foodinstruction.empty()
     meal = meal[0];
-    list=dispIngred(meal)
+    list = dispIngred(meal)
     let html = `
         <h2 class = "recipe-title">${meal.strMeal}</h2>
         <p class = "recipe-category">${meal.strCategory}</p>
@@ -337,7 +337,7 @@ function mealRecipe(meal){
         <div class = "recipe-food-image">
             <img src = "${meal.strMealThumb}" alt = "">
         </div>
-        
+
     `;
     $(".food-details").addClass("showRecipe")
     foodinstruction.append(html)
@@ -357,7 +357,7 @@ let cocktailDetail = function (drinkIngListItem1, drinkIngListItem2, drinkIngLis
     var drinkIngListItem7 = $("<li>").addClass("modal-body").text(drinkIngListItem7)
     drinkIngredientList.append(ingTitle, drinkIngListItem1, drinkIngListItem2, drinkIngListItem3, drinkIngListItem4,
         drinkIngListItem5, drinkIngListItem6, drinkIngListItem7)
-    var modalBody = $("<div>").addClass("modal-body"
+    var modalBody = $("<div>").addClass("modal-body")
     var modalTitle = $("<h2>").addClass("modal-title").text(drinkTitleM)
     var modalImg = $("<img>").addClass("modal-body img-fluid").attr("src", drinkImgM)
     modalBody.append(modalTitle, modalImg, drinkIngredientList, drinkInstructionM)
@@ -462,23 +462,23 @@ let getCocktailByName = function () {
 
 // code to clear modal form everytime for fresh input
 //$('#cocktailModal').on('shown.bs.modal', function () {
- //   $('#getCocktailForm')[0].reset();
+//   $('#getCocktailForm')[0].reset();
 //});
 
 //$(".searchCocktail").on("click", getCocktailByName)
 //$("drinkByName").empty()
 //display ingredients
-const dispIngred = (meal)=>{
-    const list= document.createElement('ul')
-    list.className='text-center mx-auto'
-    for(let i=1;i<=20;i++){
-        if(meal['strIngredient'+i]){
+const dispIngred = (meal) => {
+    const list = document.createElement('ul')
+    list.className = 'text-center mx-auto'
+    for (let i = 1; i <= 20; i++) {
+        if (meal['strIngredient' + i]) {
             const listEl = document.createElement('li')
-            listEl.className='text-md md:text-lg lg:text-xl'
-            data =  meal['strIngredient'+i]+'  '+' - '+'  '+ meal['strMeasure'+i]
-            listEl.innerHTML=data
+            listEl.className = 'text-md md:text-lg lg:text-xl'
+            data = meal['strIngredient' + i] + '  ' + ' - ' + '  ' + meal['strMeasure' + i]
+            listEl.innerHTML = data
             list.appendChild(listEl)
-        }        
+        }
     }
     return list
 }
