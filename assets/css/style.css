@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root{
@@ -17,7 +19,7 @@ body{
     font-size: 1.05rem;
     line-height: 1.6;
     font-family: 'Poppins', sans-serif;
-   
+
 }
 
 .btn{
@@ -34,7 +36,7 @@ a.btn.btn-outline-success:hover {
 
 .title{
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
  .card {
     padding-bottom: 20px;
@@ -106,7 +108,7 @@ a.btn.btn-outline-success:hover {
 }
 
 #food{
-    margin: 2.4rem 0;
+    /* margin: 2.4rem 0; */
 }
 
 .meal-item{
@@ -205,6 +207,7 @@ a.btn.btn-outline-success:hover {
     -o-border-radius: 2rem;
 }
 .showRecipe{
+  width: fit-content;
     display: block;
 }
 
@@ -248,11 +251,12 @@ a.btn.btn-outline-success:hover {
 }
 
 .recipe-instruction{
+  font-size: 14px;
     padding: 1rem 0;
 }
 .recipe-food-image img{
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -280,19 +284,19 @@ a.btn.btn-outline-success:hover {
 }
 
 .container {
-    margin-top: 20px;
-    text-align: center; /* center the text within the container */
+  margin-top: 20px;
+  text-align: center; /* center the text within the container */
 }
 
 button {
-    padding: 0;
-    border: none;
-    background: none;
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 .jumbotron {
-    background-color: white;
-    text-align: center;
+  background-color: white;
+  text-align: center;
 }
 
 .jumbotron a {
@@ -303,7 +307,7 @@ button {
 }
 
 .modal {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .modal-header {
@@ -373,17 +377,16 @@ button {
 }
 
 .hide {
-    display: none;
+  display: none;
 }
-
 
 .card {
-    margin: 20px;
-    font-weight: bolder;
-    font-size: x-large !important;
+  margin: 20px;
+  font-weight: bolder;
+  font-size: x-large !important;
 }
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 li {
@@ -395,14 +398,14 @@ h4 {
 
 /* Media Queries */
 @media (max-width: 767px) {
-    .image {
-        width: 100%; /* make the image full width on smaller screens */
-    }
+  .image {
+    width: 100%; /* make the image full width on smaller screens */
+  }
 
-    .jumbotron a {
-        display: block;
-        margin: 20px auto;
-    }
+  .jumbotron a {
+    display: block;
+    margin: 20px auto;
+  }
 }
 .wrapper {
     padding: 1rem;
@@ -427,5 +430,89 @@ h4 {
     margin-left: 0;
     margin-top: 1rem;
   }
+
+
+/******** meal page ******/
+#meal-form {
+  position: relative;
+  width: 100%;
+  margin: 10px;
+}
+#meal-input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+#search-button {
+  background-color: rgb(9, 129, 19);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+#autocomplete-list {
+  background-color: white;
+  /* border-top: #f1f1f1; */
+  width: 20rem;
+  height: 5rem;
+  position: absolute;
+  top:198px;
+  left: 17px;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+.suggestion-item {
+  text-align: left;
+}
+
+#food{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: fit-content;
+  height: 60vh;
+  padding: 10px;
+  overflow-y: scroll;
+  margin: auto 0;
+}
+.selected-item {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 240px;
+  font-size: 14px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all 0.5s;
+  text-align: center;
+}
+.selected-item:hover {
+  cursor: pointer;
+  scale: 101%;
+}
+.modal-container {
+  padding:20px;
+  text-align: justify;
+}
+.modal-container-headings {
+  width: 100%;
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-container-headings > h2 {
+  padding: 0;;
+}
 
 
