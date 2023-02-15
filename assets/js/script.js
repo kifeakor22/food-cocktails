@@ -324,6 +324,7 @@ function mealRecipe(meal) {
     foodinstruction.append(html)
     foodinstruction.addClass('showRecipe');
 }
+
 let cocktailDetail = function (drinkIngListItem1, drinkIngListItem2, drinkIngListItem3, drinkIngListItem4, drinkIngListItem5,
     drinkIngListItem6, drinkIngListItem7, drinkInstructionM, drinkTitleM, drinkImgM) {
     var drinkIngredientList = $("<ul>").addClass("modal-body")
@@ -337,7 +338,7 @@ let cocktailDetail = function (drinkIngListItem1, drinkIngListItem2, drinkIngLis
     var drinkIngListItem7 = $("<li>").addClass("modal-body").text(drinkIngListItem7)
     drinkIngredientList.append(ingTitle, drinkIngListItem1, drinkIngListItem2, drinkIngListItem3, drinkIngListItem4,
         drinkIngListItem5, drinkIngListItem6, drinkIngListItem7)
-    var modalBody = $("<div>").addClass("modal-body")
+    var modalBody = $("<div>").addClass("modal-body"
     var modalTitle = $("<h2>").addClass("modal-title").text(drinkTitleM)
     var modalImg = $("<img>").addClass("modal-body img-fluid").attr("src", drinkImgM)
     modalBody.append(modalTitle, modalImg, drinkIngredientList, drinkInstructionM)
