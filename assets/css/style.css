@@ -113,7 +113,7 @@ a.btn.btn-outline-success:hover {
     /* margin: 2.4rem 0; */
 }
 
-.meal-item{
+.food-item{
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
@@ -340,6 +340,7 @@ button {
     font-weight: 600;
     width: 100%;
 }
+
 
 @media screen and (min-width: 600px){
     .food-search-box{

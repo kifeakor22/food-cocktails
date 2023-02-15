@@ -2,6 +2,13 @@ let searchBtn = $("#search-btn");
 let foodList = $("#food");
 let foodinstruction = $('.food-contains');
 let recipeCloseBtn = $('#closeBtn');
+//Event listener
+searchBtn.on('click', getfoodlist);
+foodList.on('click', getfoodRecipe);
+recipeCloseBtn.on('click', () => {
+    foodinstruction.parentElement.classList.remove('showRecipe');
+})
+
 
 recipeCloseBtn.on('click', () => {
     $(".food-details").removeClass("showRecipe")
@@ -255,6 +262,7 @@ function clearSearchResult() {
 /*execute a function when someone clicks in the document:*/
 document.addEventListener("click", function (e) {
     closeAllLists(e.target);
+
 });
 
 // TODO: make the submit button functional - retrieve all results and display them
@@ -296,7 +304,9 @@ function getfoodlist(e) {
 
 }
 
-function getfoodRecipe(e) {
+
+//Get web Data
+function getfoodRecipe(e){
     e.preventDefault();
     if (e.target.classList.contains('recipe-btn')) {
         let foodItem = e.target.parentElement.parentElement;
@@ -306,19 +316,28 @@ function getfoodRecipe(e) {
     }
 }
 
-function mealRecipe(meal) {
+
+   
+// Display instruction
+function mealRecipe(meal){
     foodinstruction.empty()
-    console.log(meal);
     meal = meal[0];
+    list=dispIngred(meal)
     let html = `
         <h2 class = "recipe-title">${meal.strMeal}</h2>
         <p class = "recipe-category">${meal.strCategory}</p>
         <div class = "recipe-instruction">
+            <h3> Ingredients:</h3>
+            <ul class='list-disc'>
+               ${list.innerHTML}
+            <ul>
             <h3>Instructions:</h3>
             <p>${meal.strInstructions}</p>
         </div>
         <div class = "recipe-food-image">
             <img src = "${meal.strMealThumb}" alt = "">
+        </div>
+        
     `;
     $(".food-details").addClass("showRecipe")
     foodinstruction.append(html)
@@ -439,12 +458,29 @@ let getCocktailByName = function () {
 
 
 // call the getCocktailByName function when .searchCoctail is clicked
-$(".searchCocktail").on("click", getCocktailByName)
+//$(".searchCocktail").on("click", getCocktailByName)
 
 // code to clear modal form everytime for fresh input
-$('#cocktailModal').on('shown.bs.modal', function () {
-    $('#getCocktailForm')[0].reset();
-});
+//$('#cocktailModal').on('shown.bs.modal', function () {
+ //   $('#getCocktailForm')[0].reset();
+//});
 
-$(".searchCocktail").on("click", getCocktailByName)
-$("drinkByName").empty()
+//$(".searchCocktail").on("click", getCocktailByName)
+//$("drinkByName").empty()
+//display ingredients
+const dispIngred = (meal)=>{
+    const list= document.createElement('ul')
+    list.className='text-center mx-auto'
+    for(let i=1;i<=20;i++){
+        if(meal['strIngredient'+i]){
+            const listEl = document.createElement('li')
+            listEl.className='text-md md:text-lg lg:text-xl'
+            data =  meal['strIngredient'+i]+'  '+' - '+'  '+ meal['strMeasure'+i]
+            listEl.innerHTML=data
+            list.appendChild(listEl)
+        }        
+    }
+    return list
+}
+
+
