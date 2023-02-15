@@ -17,6 +17,7 @@ body{
     font-size: 1.05rem;
     line-height: 1.6;
     font-family: 'Poppins', sans-serif;
+    background-color: aliceblue;
    
 }
 
@@ -282,6 +283,9 @@ a.btn.btn-outline-success:hover {
 .container {
     margin-top: 20px;
     text-align: center; /* center the text within the container */
+}
+.ingredient {
+    color: red;
 }
 
 button {
