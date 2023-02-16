@@ -66,43 +66,77 @@ a.btn.btn-outline-success:hover {
   align-items: stretch;
 }
 
-.search,
-.search-btn {
-  width: 100%;
+
+
+.search{
+    padding: 0 1rem;
+    font-size: 1.1rem;
+    font-family: inherit;
+    outline: 0;
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+.search::placeholder{
+    color: var(--primary);
 }
 
-.search {
-  padding: 0 1rem;
-  font-size: 1.1rem;
-  font-family: inherit;
-  outline: 0;
-  border: 1px solid var(--dark);
-  color: var(--dark);
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
+.search-btn{
+    width: 55px;
+    height: 55px;
+    font-size: 1.8rem;
+    background: var(--secondary);
+    color: #fff;
+    border: none;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    transition: all 0.4s linear;
+    -webkit-transition: all 0.4s linear;
+    -moz-transition: all 0.4s linear;
+    -ms-transition: all 0.4s linear;
+    -o-transition: all 0.4s linear;
 }
-.search::placeholder {
-  color: var(--primary);
+.search-btn:hover{
+    background: var(--dark);
 }
 
-.search-btn {
-  width: 55px;
-  height: 55px;
-  font-size: 1.8rem;
-  background: var(--secondary);
-  color: #fff;
-  border: none;
-  border-top-right-radius: 2rem;
-  border-bottom-right-radius: 2rem;
-  transition: all 0.4s linear;
-  -webkit-transition: all 0.4s linear;
-  -moz-transition: all 0.4s linear;
-  -ms-transition: all 0.4s linear;
-  -o-transition: all 0.4s linear;
+.food-result{
+    margin-top: 4rem;
 }
-.search-btn:hover {
-  background: var(--dark);
+
+#food {
+    /* margin: 2.4rem 0; */
 }
+
+.meal-item{
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+    margin: 2rem 0;
+}
+
+.food-item{
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 21px -12px rgba(205, 5, 5, 0.79);
+    margin: 2rem 0;
+}
+
+.food-img img{
+    width: 100%;
+    display: block;
+
+
+
 
 .food-result {
   margin-top: 4rem;
@@ -112,16 +146,6 @@ a.btn.btn-outline-success:hover {
   /* margin: 2.4rem 0; */
 }
 
-.food-item {
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
-  margin: 2rem 0;
-}
 
 .food-item {
   border-radius: 1rem;
@@ -298,10 +322,6 @@ button {
   background: none;
 }
 
-.jumbotron {
-  background-color: white;
-  text-align: center;
-}
 
 .jumbotron a {
   background-color: #219ebc !important;
