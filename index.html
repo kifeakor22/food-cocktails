@@ -15,15 +15,15 @@
 
     <header class="header">
       <a class="navbar" href="">
-        <img src="./assets/image/Capture (2).png" width="250" height="140" class="image" alt="">     
+        <img src="./assets/image/Capture (2).png" width="100" height="80" class="image" alt="">     
       </a>
     </header>
-    <div class="jumbotron">
-      <h1 class="display-4">Welcome to Food and Cocktails!</h1>
-      <p class="lead">Want to find a recipe or learn how to make a new cocktail?</p>
-      <p class="Lead"> Click below to find out</p>
+    
+      <h1 class="display-4" style="text-align: center;">Welcome to Food and Cocktails!</h1>
+      <p class="lead" style="text-align: center;">Want to find a recipe or learn how to make a new cocktail?</p>
+      <p class="Lead" style="text-align: center;"> Click below to find out</p>
       <hr class="my-4">
-    </div>
+
     <section class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -36,7 +36,7 @@
               </a>
             </div>   
             <div class="col-lg-6">
-              <a class="btn btn-outline-success"data-toggle="modal" data-target="#cocktailModal">
+              <a class="btn btn-outline-success" href="./cocktails.html">
               <div class="card bg-light">
                   <div class="card-body bg-light">
                   <img src="./assets/image/Cocktails (1).png" class="image" height="400" width="350"/>
@@ -107,7 +107,7 @@
     <div class="container">
       <div class="row" id="displayDrink">
 
-        <<<<<<< HEAD <!--modal for cocktails-->
+       <!--modal for cocktails-->
           <div class="modal fade" id="cocktailModal" tabindex="-1" role="dialog" aria-labelledby="cocktailModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -136,6 +136,13 @@
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-secondary searchCocktail">Search for cocktail</button>
                 </div>
+            <div class="col-sm-6">
+              <div class="card bg-light">
+                <a class="btn btn-outline-success" href="./cocktails.html">
+                    <div class="card-body bg-light">
+                      <img src="./assets/image/Cocktails (1).png" height="400" width="350"/>    
+                    </div>
+                </a>
               </div>
             </div>
           </div>
@@ -188,7 +195,6 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            >>>>>>> e7393fd (feat: clear suggestions when option is choosen)
           </div>
         </div>
       </div>
