@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <title>Prepare your Meal</title>
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -21,18 +23,12 @@
                     <h2 class="title">Ready to Make Cocktails</h2>
                     <div class="food-search">
                         <input type="text" class="search" placeholder="Enter Search Name" id="search-cocktails">
-                        <button type="submit" class="search-btn btn" id="search-bt">
-                            <i class="fas fa-search"></i>
+                        <button type="submit" class="" id="search-bt"  >
+                            <img src="./assets/image/search.png" height="40px" width="40px">
                         </button>
                         
                     </div>
-                    <div class="checkbox">
-
-                        <input type="checkbox" id="SearchByIngredient">
-                        <label for="SearchByIngredient">Search by ingredient</label>
-                        <input type="checkbox" id="getRandom">
-                        <label for="getRandom">Get Random Drink</label>
-                    </div>
+                    <button type="button" class="btn btn-outline-primary" id="random">Need Random Suggestion?</button>
                 </div>
 
                 <!--drink Item list-->
@@ -48,6 +44,12 @@
                                 <a href="#" class="recipe-btn">Get Recipe</a>
                             </div>    
                         </div>> -->
+                    </div>
+                </div>
+
+                <div class="cocktail-result">
+                    <div id="food">
+                
                     </div>
                 </div>
 
