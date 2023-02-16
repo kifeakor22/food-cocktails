@@ -94,11 +94,20 @@ input {
 }
 
 .food-result {
-  margin-top: 4rem;
+  position: relative;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: fit-content;
 }
 
 #food {
-  margin: 2.4rem 0;
+  position: relative;
+  margin: 1rem 0;
+  overflow-y: scroll;
+  height: 60vh;
+  width: 100%;
 }
 
 .food-item {
@@ -308,14 +317,16 @@ button {
     width: 540px;
     margin-left: auto;
     margin-right: auto;
+    border: solid 1px red;
   }
 }
-
-@media screen and (min-width: 768px) {
+@media all and (max-width: 480px) {
   #food {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 0.5rem;
+    overflow-y: scroll;
+    height: 26rem;
   }
   .food-item {
     margin: 0;
@@ -327,11 +338,61 @@ button {
   .close-button {
     margin-left: 90%;
   }
+  body #autocomplete-list {
+    z-index: 10;
+    width: 10rem;
+  }
 }
 
-@media screen and (min-width: 992px) {
+@media all and (min-width: 480px) and (max-width: 768px) {
   #food {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    overflow-y: scroll;
+    height: 21rem;
+  }
+  .food-item {
+    margin: 0;
+  }
+  .food-details {
+    width: 700px;
+  }
+  .close-button {
+    margin-left: 90%;
+  }
+  body #autocomplete-list {
+    z-index: 10;
+    width: 16.5rem;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  #food {
+    grid-template-columns: repeat(4, 1fr);
+    display: grid;
+    gap: 0.2rem;
+    overflow-y: scroll;
+    height: 20rem;
+  }
+  body #autocomplete-list {
+    z-index: 10;
+    width: 24rem;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  #food {
+    grid-template-columns: repeat(6, 1fr);
+    display: grid;
+    gap: 0.2rem;
+    overflow-y: scroll;
+    height: 20rem;
+  }
+
+  body #autocomplete-list {
+    z-index: 10;
+    /* width: 16.5rem; */
   }
 }
 .modal-body p {
@@ -375,6 +436,7 @@ h4 {
 }
 .wrapper {
   padding: 1rem;
+  height: 85vh;
 }
 
 .food-item,

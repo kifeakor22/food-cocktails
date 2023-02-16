@@ -211,13 +211,6 @@ async function callApiWithFilterInUrl(queryValue, querySuggestion) {
     }
 }
 
-// searchForm.addEventListener('submit', async (e) => {
-//     e.preventDefault()
-//     let searchReturns = await getSuggestionsFromAPI(e.target.value)
-
-
-// })
-
 function displaySelectedResult(paramObj) {
     //clear existing selection
     let selectedResult = document.createElement('div')
