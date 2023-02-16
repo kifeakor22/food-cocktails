@@ -29,15 +29,15 @@ body {
 }
 
 a.btn.btn-outline-success:hover {
-  background-color: var(--dark);
-  border-color: var(--dark);
+  background-color: #fb8500;
+  border-color: #fb8500;
 }
 
 .btn-outline-success {
   border-color: #fb8500;
 }
 
-.btn-outline-success:active {
+.btn-outline-success:focus {
   background-color: #fb8500;
 }
 
