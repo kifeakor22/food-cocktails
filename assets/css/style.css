@@ -33,6 +33,14 @@ a.btn.btn-outline-success:hover {
   border-color: var(--dark);
 }
 
+.btn-outline-success {
+  border-color: #fb8500;
+}
+
+.btn-outline-success:active {
+  background-color: #fb8500;
+}
+
 .title {
   font-size: 2rem;
   margin-bottom: 0.5rem;
