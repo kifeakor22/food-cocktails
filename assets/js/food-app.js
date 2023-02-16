@@ -18,11 +18,10 @@ let queryKey = ''
 let selectedValue = ''
 
 let countRadio = 0;
+
 apiSearchParams.forEach((apiSearchParam) => {
-    if (!apiSearchParam.checked) {
-        countRadio++
-    }
     apiSearchParam.addEventListener('change', () => {
+        countRadio = 1
         apiSearchParam.checked = true;
         setAPIURL(apiSearchParam)
         closeAllLists();
@@ -57,14 +56,20 @@ function setAPIURL(apiSearchParam) {
 
 //get suggestions as user types
 async function getSuggestions({ target }) {
-    if (countRadio == 3) {
-        apiSearchParams[0].checked = true;
-        setAPIURL(apiSearchParams[0])
-        countRadio = 0;
-    }
-
     let inputData = target.value;
 
+    if (countRadio = 0 ) {
+        for (let radioButton of apiSearchParams) {
+            if (!radioButton.checked) {
+                countRadio++
+                if (countRadio == 3) {
+                    apiSearchParams[0].checked = true
+                    setAPIURL(apiSearchParams[0])
+                    closeAllLists();
+                }
+            }
+        }
+    }
 
     if (inputData.length) {
         let suggestionBox = document.createElement('ul');
