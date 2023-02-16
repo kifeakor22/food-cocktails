@@ -24,13 +24,22 @@ It's done when:
 
 - The app is responsive and has a polished UI.
 
-Welcome to our Food and Cocktails Recipe website! This website provides a collection of delicious cocktail and meal recipes for you to enjoy. You can find the website at https://kifeakor22.github.io/food-cocktails/.
 
-Features
+
+
+
+Welcome to our Food and Cocktails Recipe website! This website provides a collection of delicious cocktail and meal recipes using APIs for you to enjoy. You can find the website at https://kifeakor22.github.io/food-cocktails/.
+
+## Features
+
 Our website includes the following features:
 
-Easy navigation to find your favorite recipes.
-Separate sections for cocktails and meals, with a wide range of options for any occasion.
-Detailed instructions and ingredient lists for each recipe.
-Ability to search for recipes by name or ingredient.
-Mobile-friendly design, so you can browse recipes on the go.
+- Easy navigation to find your favorite recipes.
+
+- Separate sections for cocktails and meals, with a wide range of options for any occasion.
+
+- Detailed instructions and ingredient lists for each recipe.
+
+- Ability to search for recipes by name or ingredient.
+
+- Mobile-friendly design, so you can browse recipes on the go.
