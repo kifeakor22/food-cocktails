@@ -16,8 +16,11 @@ let apiMealURL = ''
 let parameter = ''
 let queryKey = ''
 let selectedValue = ''
+var currentFocus;
 
-let countRadio = 0;
+apiSearchParams[0].checked = true
+setAPIURL(apiSearchParams[0])
+closeAllLists();
 
 apiSearchParams.forEach((apiSearchParam) => {
     apiSearchParam.addEventListener('change', () => {
@@ -58,18 +61,7 @@ function setAPIURL(apiSearchParam) {
 async function getSuggestions({ target }) {
     let inputData = target.value;
 
-    if (countRadio = 0 ) {
-        for (let radioButton of apiSearchParams) {
-            if (!radioButton.checked) {
-                countRadio++
-                if (countRadio == 3) {
-                    apiSearchParams[0].checked = true
-                    setAPIURL(apiSearchParams[0])
-                    closeAllLists();
-                }
-            }
-        }
-    }
+    currentFocus = -1;
 
     if (inputData.length) {
         let suggestionBox = document.createElement('ul');
@@ -110,11 +102,51 @@ async function getSuggestions({ target }) {
             suggestionItem.setAttribute('class', 'suggestion-item')
 
             suggestionBox.innerHTML = '<p> No item in our DB </p>'
-
         }
 
     }
 }
+
+//scroll down to select from list
+mealInput.addEventListener('keydown', function (e) {
+    var x = document.getElementById('autocomplete-list')
+    if (x) x = x.getElementsByTagName("li");
+    if (e.key == "ArrowDown") {
+        currentFocus++;
+        addActive(x);
+    } else if (e.key == "ArrowUp") {
+        currentFocus--;
+        addActive(x);
+    } else if (e.key == "Enter") {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+            if (x) {
+                x[currentFocus].click()
+            };
+        }
+    }
+
+})
+function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+}
+function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+    }
+}
+
+
 async function callApiWithFilterInUrl(queryValue, querySuggestion) {
     if (searchType == 'area') {
         clearSearchResult();

@@ -456,21 +456,25 @@ h4 {
 }
 
 #autocomplete-list {
+  z-index: 10;
   background-color: white;
-  /* border-top: #f1f1f1; */
-  width: 20rem;
-  height: 5rem;
+  width: 30rem;
+  height: 7rem;
   position: absolute;
-  top: 198px;
+  top: 162px;
   left: 17px;
   overflow-y: scroll;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 .suggestion-item {
+  position: relative;
   text-align: left;
+  /* background-color: #f1f1f1; */
+  width: 100%;
 }
 
 #food {
@@ -596,4 +600,9 @@ r .recipe-instruction > h4 {
   position: relative;
   font-size: 12px;
   text-overflow: ellipsis;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
 }
