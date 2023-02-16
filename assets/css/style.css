@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
-
 *,
 *::before,
 *::after {
@@ -19,7 +18,6 @@ body {
   font-size: 1.05rem;
   line-height: 1.6;
   font-family: "Poppins", sans-serif;
-
   background-color: aliceblue;
 }
 
@@ -45,9 +43,6 @@ a.btn.btn-outline-success:hover {
   box-shadow: 0 4px 21px -12px rgba(205, 5, 5, 0.79);
 }
 
-.container {
-  min-height: 100vh;
-}
 .wrapper {
   max-width: 1280px;
   margin: 0 auto;
@@ -62,16 +57,10 @@ a.btn.btn-outline-success:hover {
 
 .food-search {
   margin: 1.2rem 0;
-  display: flex;
-  align-items: stretch;
-}
-
-.search,
-.search-btn {
-  width: 100%;
 }
 
 .search {
+  width: 55%;
   padding: 0 1rem;
   font-size: 1.1rem;
   font-family: inherit;
@@ -85,23 +74,8 @@ a.btn.btn-outline-success:hover {
   color: var(--primary);
 }
 
-.search-btn {
-  width: 55px;
-  height: 55px;
-  font-size: 1.8rem;
-  background: var(--secondary);
-  color: #fff;
-  border: none;
-  border-top-right-radius: 2rem;
-  border-bottom-right-radius: 2rem;
-  transition: all 0.4s linear;
-  -webkit-transition: all 0.4s linear;
-  -moz-transition: all 0.4s linear;
-  -ms-transition: all 0.4s linear;
-  -o-transition: all 0.4s linear;
-}
 .search-btn:hover {
-  background: var(--dark);
+  background: var(--primary);
 }
 
 .food-result {
@@ -109,19 +83,9 @@ a.btn.btn-outline-success:hover {
 }
 
 #food {
-  /* margin: 2.4rem 0; */
+   margin: 2.4rem 0;
 }
 
-.food-item {
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
-  margin: 2rem 0;
-}
 
 .food-item {
   border-radius: 1rem;
@@ -288,9 +252,7 @@ a.btn.btn-outline-success:hover {
   margin-top: 20px;
   text-align: center; /* center the text within the container */
 }
-.ingredient {
-  color: red;
-}
+
 
 button {
   padding: 0;
@@ -298,17 +260,8 @@ button {
   background: none;
 }
 
-.jumbotron {
-  background-color: white;
-  text-align: center;
-}
 
-.jumbotron a {
-  background-color: #219ebc !important;
-  display: inline-block;
-  padding: 10px 20px;
-  margin-top: 20px;
-}
+
 
 .modal {
   text-align: center !important;
@@ -477,19 +430,7 @@ h4 {
   width: 100%;
 }
 
-#food {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  gap: 7px;
-  flex-wrap: wrap;
-  width: 100%;
-  min-height: fit-content;
-  height: 60vh;
-  padding: 10px;
-  overflow-y: scroll;
-  margin: auto 0;
-}
+
 .selected-item {
   padding: 10px;
   display: flex;
