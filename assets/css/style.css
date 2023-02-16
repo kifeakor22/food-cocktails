@@ -537,7 +537,7 @@ h4 {
 }
 .recipe-instruction {
   position: relative;
-  height: 180px;
+
   overflow-y: auto;
 }
 r .recipe-instruction > h4 {
