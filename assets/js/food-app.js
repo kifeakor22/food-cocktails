@@ -1,4 +1,7 @@
 /**************************  START MEAL SEARCH PAGE *************************/
+// TODO: Finish search button
+// TODO: Fix displayed result for search
+// TODO: try and add arrow scroll to suggestions
 
 // variables for meal search input
 let mealInput = document.getElementById('search-input');
