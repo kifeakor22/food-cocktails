@@ -101,6 +101,7 @@ a.btn.btn-outline-success:hover {
 .food-img img {
   width: 100%;
   display: block;
+  margin-left: auto;
 }
 
 .food-name {
@@ -292,6 +293,7 @@ button {
   font-weight: 600;
   width: 100%;
 }
+
 
 @media screen and (min-width: 600px) {
   .food-search-box {

@@ -2,10 +2,13 @@
 const searchBt=document.getElementById('search-bt');
 const foodList=document.getElementById("food");
 const foodinstruction=document.querySelector('.food-contains');
+const ran=document.getElementById("random");
+
 
 const recipeCloseBtn=document.getElementById('closeBtn');
 
 //Event Listener
+ran.addEventListener('click',getRandomDrink);
 searchBt.addEventListener('click', getCocktailsByName);
 foodList.addEventListener('click', getDrinksDetails);
 recipeCloseBtn.addEventListener('click', () => {
@@ -93,3 +96,35 @@ const dispIngred = (drink)=>{
     }
     return list
 }
+
+
+function getRandomDrink(){
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+    .then(response => response.json())
+    .then(data => {
+        let html = "";
+        if(data.drinks){
+            data.drinks.forEach(drink => {
+                html += `
+                    <div class = "food-item" data-id = "${drink.idDrink}">
+                        <div class = "food-img">
+                            <img src = "${drink.strDrinkThumb}" alt = "food">
+                        </div>
+                        <div class = "food-name">
+                            <h3>${drink.strDrink}</h3>
+                            <a href = "#" class = "recipe-btn">Get Recipe</a>
+                        </div>
+                    </div>
+                `;
+            });
+            foodList.classList.remove('notFound');
+        } else{
+            html = "Sorry, we didn't find any meal!";
+            foodList.classList.add('notFound');
+        }
+
+        foodList.innerHTML = html;
+    });
+    
+}
+
