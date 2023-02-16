@@ -153,8 +153,6 @@ a.btn.btn-outline-success:hover {
   -moz-border-radius: 1rem;
   -ms-border-radius: 1rem;
   -o-border-radius: 1rem;
-  width: 90%;
-  height: 90%;
   overflow-y: scroll;
   display: none;
   padding: 2rem 0;
