@@ -19,259 +19,7 @@ searchBtn.on('click', getfoodlist);
 foodList.on('click', getfoodRecipe);
 
 
-/**************************  START MEAL SEARCH PAGE *************************/
-
-// variables for meal search input
-let mealInput = document.getElementById('search-input');
-
-// add eventlisteners
-mealInput.addEventListener('input', getSuggestions)
-
-let apiSearchParams = document.getElementsByName('api-search-param');
-let searchFood = document.querySelector('#food')
-let searchForm = document.querySelector('#meal-form')
-
-// some values needed for making the api call
-let searchType = '' //name, area, ingredient
-let apiMealURL = ''
-let parameter = ''
-let queryKey = ''
-let selectedValue = ''
-
-let countRadio = 0;
-apiSearchParams.forEach((apiSearchParam) => {
-    if (!apiSearchParam.checked) {
-        countRadio++
-    }
-    apiSearchParam.addEventListener('change', () => {
-        apiSearchParam.checked = true;
-        setAPIURL(apiSearchParam)
-        closeAllLists();
-        clearSearchResult()
-        mealInput.value = ""
-    })
-})
-function setAPIURL(apiSearchParam) {
-    if (apiSearchParam.checked) {
-        searchType = apiSearchParam.value
-    }
-
-    switch (searchType) {
-        case 'name':
-            apiMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s';
-            parameter = 's'
-            queryKey = 'strMeal'
-            break;
-        case 'ingredient':
-            apiMealURL = 'https://www.themealdb.com/api/json/v1/1/list.php?i';
-            parameter = 'i'
-            queryKey = 'strIngredient'
-            break;
-        case 'area':
-            apiMealURL = 'https://www.themealdb.com/api/json/v1/1/list.php?a';
-            parameter = 'a'
-            queryKey = 'strArea'
-            break;
-    }
-}
-
-
-//get suggestions as user types
-async function getSuggestions({ target }) {
-    if (countRadio == 3) {
-        apiSearchParams[0].checked = true;
-        setAPIURL(apiSearchParams[0])
-        countRadio = 0;
-    }
-
-    let inputData = target.value;
-
-
-    if (inputData.length) {
-        let suggestionBox = document.createElement('ul');
-        suggestionBox.setAttribute('id', 'autocomplete-list');
-        suggestionBox.setAttribute('class', 'autocomplete-items')
-
-        this.parentNode.appendChild(suggestionBox)
-
-        let suggestions = await getSuggestionsFromAPI(inputData)
-        if (suggestions) {
-
-            let suggestionList = suggestions.filter((suggestion) => (suggestion[queryKey].toLowerCase().includes(inputData)))
-            suggestionList.map(suggested => {
-                let suggestionItem = document.createElement('li');
-                suggestionBox.appendChild(suggestionItem);
-                suggestionItem.setAttribute('class', 'suggestion-item')
-
-                let mealName = document.createElement('p')
-
-
-                suggestionItem.appendChild(mealName);
-                suggestionItem.style.borderBottom = '1px solid blue';
-
-                mealName.innerHTML = suggested[queryKey]
-
-
-                mealName.addEventListener("click", async ({ target }) => {
-                    mealInput.value = target.innerHTML.trim()
-
-                    callApiWithFilterInUrl(target.innerHTML, suggested)
-
-                    closeAllLists();
-                })
-            })
-        } else {
-            let suggestionItem = document.createElement('li');
-            suggestionBox.appendChild(suggestionItem);
-            suggestionItem.setAttribute('class', 'suggestion-item')
-
-            suggestionBox.innerHTML = '<p> No item in our DB </p>'
-
-        }
-
-    }
-}
-async function callApiWithFilterInUrl(queryValue, querySuggestion) {
-    if (searchType == 'area') {
-        clearSearchResult();
-
-        apiMealURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a';
-        parameter = 'a'
-        queryKey = 'strMeal'
-
-        const areaResults = await getSuggestionsFromAPI(queryValue.trim())
-        if (areaResults) {
-            areaResults.map(area => (
-                displaySelectedResult(area)
-            ))
-        }
-    }
-    if (searchType == 'ingredient') {
-        clearSearchResult();
-
-        apiMealURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i';
-        parameter = 'i'
-        queryKey = 'strMeal'
-
-        const ingredientResults = await getSuggestionsFromAPI(queryValue.trim())
-        if (ingredientResults) {
-            ingredientResults.map(ingredient => (
-                displaySelectedResult(ingredient)
-            ))
-        }
-    }
-    if (searchType == 'name') {
-        clearSearchResult();
-
-        apiMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s';
-        parameter = 's'
-        queryKey = 'strMeal'
-
-        const nameResults = await getSuggestionsFromAPI(queryValue.trim())
-        if (nameResults) {
-            nameResults.map(name => (
-                displaySelectedResult(name)
-            ))
-        }
-    }
-}
-
-// searchForm.addEventListener('submit', async (e) => {
-//     e.preventDefault()
-//     let searchReturns = await getSuggestionsFromAPI(e.target.value)
-
-
-// })
-
-function displaySelectedResult(paramObj) {
-    //clear existing selection
-    let selectedResult = document.createElement('div')
-    selectedResult.setAttribute('class', 'selected-item')
-
-    let selectedResultImage = document.createElement('img')
-    selectedResultImage.setAttribute('class', 'selected-img')
-    let selectedResultName = document.createElement('p');
-
-    searchFood.appendChild(selectedResult)
-    selectedResult.appendChild(selectedResultImage)
-    selectedResult.appendChild(selectedResultName)
-
-    selectedResultName.innerHTML = paramObj['strMeal']
-    selectedResultImage.src = paramObj['strMealThumb']
-
-    selectedResult.addEventListener('click', () => {
-        foodinstruction.empty()
-        let html = `
-        <div class='modal-container'>
-            <div class='modal-container-headings'>
-                <h2 class = "recipe-title">${paramObj['strMeal']}</h2>
-                <p class = "recipe-category">${paramObj['strCategory']}</p>
-            </div>
-        <div class = "recipe-instruction">
-            <h4>Instructions:</h4>
-            <p>${paramObj['strInstructions']}</p>
-        </div>
-        <div class = "recipe-food-image">
-            <img src = "${paramObj['strMealThumb']}" alt = "">
-        </div>
-
-    `;
-        $(".food-details").addClass("showRecipe")
-        foodinstruction.append(html)
-        foodinstruction.addClass('showRecipe');
-
-        closeAllLists()
-
-    })
-}
-// api call for suggestions is made here
-async function getSuggestionsFromAPI(inputValue) {
-    let newURL = new URL(apiMealURL);
-    newURL.searchParams.set(parameter, inputValue)
-
-    const res = await fetch(newURL)
-
-    if (res.ok) {
-        let data = await res.json()
-        let meals = await data['meals']
-        return meals
-    }
-}
-
-// close the suggestion box
-function closeAllLists(element) {
-    let x = document.querySelectorAll('.autocomplete-items')
-    for (let i = 0; i < x.length; i++) {
-        if (element != x[i] && element != mealInput) {
-            x[i].parentNode.removeChild(x[i]);
-        }
-    }
-}
-
-// clear search results
-function clearSearchResult() {
-    if (searchFood.firstChild != null) {
-        let results = document.querySelectorAll('.selected-item')
-        for (let i = 0; i < results.length; i++) {
-            results[i].parentNode.removeChild(results[i])
-        }
-    }
-
-}
-
-/*execute a function when someone clicks in the document:*/
-document.addEventListener("click", function (e) {
-    closeAllLists(e.target);
-
-});
-
-// TODO: make the submit button functional - retrieve all results and display them
-// TODO: change placeholder when radio button changes
-
-/*************************************************  END MEAL SEARCH PAGE ***************************************/
-
 //geting foodlist with given search text
-
 function getfoodlist(e) {
     e.preventDefault()
     let inputSearch = $('#search-input').val().trim();
@@ -306,7 +54,7 @@ function getfoodlist(e) {
 
 
 //Get web Data
-function getfoodRecipe(e){
+function getfoodRecipe(e) {
     e.preventDefault();
     if (e.target.classList.contains('recipe-btn')) {
         let foodItem = e.target.parentElement.parentElement;
@@ -317,12 +65,12 @@ function getfoodRecipe(e){
 }
 
 
-   
+
 // Display instruction
-function mealRecipe(meal){
+function mealRecipe(meal) {
     foodinstruction.empty()
     meal = meal[0];
-    list=dispIngred(meal)
+    list = dispIngred(meal)
     let html = `
         <h2 class = "recipe-title">${meal.strMeal}</h2>
         <p class = "recipe-category">${meal.strCategory}</p>
@@ -337,7 +85,7 @@ function mealRecipe(meal){
         <div class = "recipe-food-image">
             <img src = "${meal.strMealThumb}" alt = "">
         </div>
-        
+
     `;
     $(".food-details").addClass("showRecipe")
     foodinstruction.append(html)
@@ -357,7 +105,7 @@ let cocktailDetail = function (drinkIngListItem1, drinkIngListItem2, drinkIngLis
     var drinkIngListItem7 = $("<li>").addClass("modal-body").text(drinkIngListItem7)
     drinkIngredientList.append(ingTitle, drinkIngListItem1, drinkIngListItem2, drinkIngListItem3, drinkIngListItem4,
         drinkIngListItem5, drinkIngListItem6, drinkIngListItem7)
-    var modalBody = $("<div>").addClass("modal-body"
+    var modalBody = $("<div>").addClass("modal-body")
     var modalTitle = $("<h2>").addClass("modal-title").text(drinkTitleM)
     var modalImg = $("<img>").addClass("modal-body img-fluid").attr("src", drinkImgM)
     modalBody.append(modalTitle, modalImg, drinkIngredientList, drinkInstructionM)
@@ -462,23 +210,23 @@ let getCocktailByName = function () {
 
 // code to clear modal form everytime for fresh input
 //$('#cocktailModal').on('shown.bs.modal', function () {
- //   $('#getCocktailForm')[0].reset();
+//   $('#getCocktailForm')[0].reset();
 //});
 
 //$(".searchCocktail").on("click", getCocktailByName)
 //$("drinkByName").empty()
 //display ingredients
-const dispIngred = (meal)=>{
-    const list= document.createElement('ul')
-    list.className='text-center mx-auto'
-    for(let i=1;i<=20;i++){
-        if(meal['strIngredient'+i]){
+const dispIngred = (meal) => {
+    const list = document.createElement('ul')
+    list.className = 'text-center mx-auto'
+    for (let i = 1; i <= 20; i++) {
+        if (meal['strIngredient' + i]) {
             const listEl = document.createElement('li')
-            listEl.className='text-md md:text-lg lg:text-xl'
-            data =  meal['strIngredient'+i]+'  '+' - '+'  '+ meal['strMeasure'+i]
-            listEl.innerHTML=data
+            listEl.className = 'text-md md:text-lg lg:text-xl'
+            data = meal['strIngredient' + i] + '  ' + ' - ' + '  ' + meal['strMeasure' + i]
+            listEl.innerHTML = data
             list.appendChild(listEl)
-        }        
+        }
     }
     return list
 }
