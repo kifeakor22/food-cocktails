@@ -3,6 +3,12 @@
 // TODO: Fix displayed result for search
 // TODO: try and add arrow scroll to suggestions
 
+/*
+ */
+/*
+ */
+
+
 // variables for meal search input
 let mealInput = document.getElementById('search-input');
 
@@ -66,6 +72,8 @@ async function getSuggestions({ target }) {
 
     currentFocus = -1;
 
+    if (!inputData.length) closeAllLists();
+
     if (inputData.length) {
         let suggestionBox = document.createElement('ul');
         suggestionBox.setAttribute('id', 'autocomplete-list');
@@ -75,7 +83,6 @@ async function getSuggestions({ target }) {
 
         let suggestions = await getSuggestionsFromAPI(inputData)
         if (suggestions) {
-
             let suggestionList = suggestions.filter((suggestion) => (suggestion[queryKey].toLowerCase().includes(inputData)))
             suggestionList.map(suggested => {
                 let suggestionItem = document.createElement('li');
@@ -86,7 +93,6 @@ async function getSuggestions({ target }) {
 
 
                 suggestionItem.appendChild(mealName);
-                suggestionItem.style.borderBottom = '1px solid blue';
 
                 mealName.innerHTML = suggested[queryKey]
 
@@ -109,6 +115,15 @@ async function getSuggestions({ target }) {
 
     }
 }
+document.querySelector("form").addEventListener('submit', async (e) => {
+    e.preventDefault()
+    let searchItems = mealInput.value.trim()
+    apiSearchParams[0].checked = true;
+    setAPIURL(apiSearchParams[0])
+    closeAllLists();
+    mealInput.value = "";
+    callApiWithFilterInUrl(searchItems)
+})
 
 //scroll down to select from list
 mealInput.addEventListener('keydown', function (e) {
@@ -148,6 +163,7 @@ function removeActive(x) {
         x[i].classList.remove("autocomplete-active");
     }
 }
+
 
 
 async function callApiWithFilterInUrl(queryValue, querySuggestion) {
