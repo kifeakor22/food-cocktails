@@ -360,6 +360,8 @@ document.addEventListener("click", function (e) {
 
 });
 
+
+
 // TODO: make the submit button functional - retrieve all results and display them
 // TODO: change placeholder when radio button changes
 
