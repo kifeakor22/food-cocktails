@@ -158,7 +158,7 @@ input {
 }
 
 .recipe-btn:hover {
-  background: var(--dark);
+  background: orange;
 }
 
 .food-details {
@@ -194,7 +194,6 @@ input {
   -o-border-radius: 2rem;
 }
 .showRecipe {
-  width: fit-content;
   display: block;
 }
 
