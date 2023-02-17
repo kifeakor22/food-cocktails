@@ -311,7 +311,6 @@ button {
   width: 100%;
 }
 
-
 @media screen and (min-width: 600px) {
   .food-search-box {
     width: 540px;
@@ -607,6 +606,7 @@ h4 {
 .recipe-instruction {
   position: relative;
 
+  height: 300px;
   overflow-y: auto;
 }
 r .recipe-instruction > h4 {
@@ -621,4 +621,29 @@ r .recipe-instruction > h4 {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+.container-local {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view-clear-locals {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  text-decoration: underline;
+}
+.view-local:active {
+  color: dodgerblue;
+}
+.save-to-locals {
+  padding: 3px;
+  height: 30px;
+  width: 30px;
+  background-color: #219ebc;
+}
+.save-to-locals:hover {
+  cursor: pointer;
+  scale: 102%;
 }

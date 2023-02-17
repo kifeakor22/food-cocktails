@@ -51,7 +51,13 @@
 
                 <!--Food Item list-->
                 <div class="food-result">
-                    <h2 class="title">Search Results:</h2>
+                    <div class="container-local">
+                        <h2 class="title">Search Results:</h2>
+                        <div class="view-clear-locals">
+                            <button type="submit" class="view-local">view saved</button>
+                        </div>
+                    </div>
+
                     <div id="food">
                     </div>
                 </div>
@@ -59,9 +65,14 @@
                 <!--food details-->
                 <div class="food-details">
                     <button class="close-button" id="closeBtn">X</button>
-
+                    <a class="save-to-locals"> + </a>
                     <div class="food-contains">
-                        <h2 class="recipe-title">Food Name Here</h2>
+
+                        <div>
+                            <h2 class="recipe-title">Food Name Here</h2>
+
+                        </div>
+
                         <p class="recipe-catogory">Catogory Name</p>
                         <div class="recipe-instruction">
                             <h3>Instruction</h3>
