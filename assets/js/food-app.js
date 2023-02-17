@@ -1,7 +1,11 @@
 /**************************  START MEAL SEARCH PAGE *************************/
-// TODO: Finish search button
-// TODO: Fix displayed result for search
 // TODO: try and add arrow scroll to suggestions
+
+/*
+ */
+/*
+ */
+
 
 // variables for meal search input
 let mealInput = document.getElementById('search-input');
@@ -12,6 +16,11 @@ mealInput.addEventListener('input', getSuggestions)
 let apiSearchParams = document.getElementsByName('api-search-param');
 let searchFood = document.querySelector('#food')
 let searchForm = document.querySelector('#meal-form')
+
+let saveToLocal = document.querySelector('.save-to-locals')
+saveToLocal.addEventListener('click', addToLocalStorage)
+let localStorageItem
+
 
 // some values needed for making the api call
 let searchType = '' //name, area, ingredient
@@ -66,6 +75,8 @@ async function getSuggestions({ target }) {
 
     currentFocus = -1;
 
+    if (!inputData.length) closeAllLists();
+
     if (inputData.length) {
         let suggestionBox = document.createElement('ul');
         suggestionBox.setAttribute('id', 'autocomplete-list');
@@ -75,7 +86,6 @@ async function getSuggestions({ target }) {
 
         let suggestions = await getSuggestionsFromAPI(inputData)
         if (suggestions) {
-
             let suggestionList = suggestions.filter((suggestion) => (suggestion[queryKey].toLowerCase().includes(inputData)))
             suggestionList.map(suggested => {
                 let suggestionItem = document.createElement('li');
@@ -86,7 +96,6 @@ async function getSuggestions({ target }) {
 
 
                 suggestionItem.appendChild(mealName);
-                suggestionItem.style.borderBottom = '1px solid blue';
 
                 mealName.innerHTML = suggested[queryKey]
 
@@ -109,6 +118,17 @@ async function getSuggestions({ target }) {
 
     }
 }
+
+// form submission
+document.querySelector("form").addEventListener('submit', async (e) => {
+    e.preventDefault()
+    let searchItems = mealInput.value.trim()
+    apiSearchParams[0].checked = true;
+    setAPIURL(apiSearchParams[0])
+    closeAllLists();
+    mealInput.value = "";
+    callApiWithFilterInUrl(searchItems)
+})
 
 //scroll down to select from list
 mealInput.addEventListener('keydown', function (e) {
@@ -148,6 +168,7 @@ function removeActive(x) {
         x[i].classList.remove("autocomplete-active");
     }
 }
+
 
 
 async function callApiWithFilterInUrl(queryValue, querySuggestion) {
@@ -195,13 +216,6 @@ async function callApiWithFilterInUrl(queryValue, querySuggestion) {
     }
 }
 
-// searchForm.addEventListener('submit', async (e) => {
-//     e.preventDefault()
-//     let searchReturns = await getSuggestionsFromAPI(e.target.value)
-
-
-// })
-
 function displaySelectedResult(paramObj) {
     //clear existing selection
     let selectedResult = document.createElement('div')
@@ -221,11 +235,10 @@ function displaySelectedResult(paramObj) {
     selectedResult.addEventListener('click', async () => {
 
         foodinstruction.empty()
-        // console.log(paramObj)
+
         const fetchData = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${paramObj['strMeal']}`)
         let data = await fetchData.json()
         let meals = data['meals'][0]
-        console.log(meals)
 
         let ingredientsUL = document.createElement("ul");
         ingredientsUL.setAttribute('class', 'recipe-body-side')
@@ -242,11 +255,13 @@ function displaySelectedResult(paramObj) {
                 ingredientItem.innerHTML = (`${meals[allMeasures[i]]} => ${meals[allIngredents[i]]}`)
             };
         }
-        let joinedMeasureAndIngredents = buildMap(allMeasures, allIngredents)
+        buildMap(allMeasures, allIngredents)
+        localStorageItem = meals.strMeal
         let html = `
         <div class='modal-container'>
             <div class='modal-container-headings'>
                 <h2 class = "recipe-title">${meals.strMeal}</h2>
+
             </div>
             <div class='recipe-body-container'>
                 <div class='ul'>${ingredientsUL.innerHTML}</div>
@@ -264,18 +279,45 @@ function displaySelectedResult(paramObj) {
                 <h4>Instructions:</h4>
                 <p style="color: black;">${meals.strInstructions}</p>
              </div>
-            <div class = "recipe-food-image">
 
-            </div>
         </div>
-
     `;
         $(".food-details").addClass("showRecipe")
         foodinstruction.append(html)
         foodinstruction.addClass('showRecipe');
 
         closeAllLists()
+
+
     })
+}
+
+function addToLocalStorage() {
+    let localMeals;
+    if (localStorage.getItem('localMeals') === null) {
+        localMeals = []
+    } else {
+        localMeals = JSON.parse(localStorage.getItem('localMeals'))
+    }
+
+    localMeals.push(localStorageItem)
+    localStorage.setItem("localMeals", JSON.stringify(localMeals))
+}
+
+document.querySelector('.view-local').addEventListener('click', getFromLocalStorage)
+
+function getFromLocalStorage() {
+    let localMeals;
+    if (localStorage.getItem("localMeals") === null) {
+        // create empty list if null
+        localMeals = [];
+
+    } else {
+        // parse the values of the localstorage to todos
+        localMeals = JSON.parse(localStorage.getItem('localMeals'))
+
+        localMeals.forEach(localMeal => (callApiWithFilterInUrl(localMeal)))
+    }
 }
 // api call for suggestions is made here
 async function getSuggestionsFromAPI(inputValue) {

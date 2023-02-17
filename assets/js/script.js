@@ -46,7 +46,6 @@ function getfoodlist(e) {
             foodList.append(html)
         })
 
-
 }
 
 
