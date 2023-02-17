@@ -30,6 +30,14 @@ It's done when:
 
 Welcome to our Food and Cocktails Recipe website! This website provides a collection of delicious cocktail and meal recipes using APIs for you to enjoy. You can find the website at https://kifeakor22.github.io/food-cocktails/.
 
+![main page](./assets/image/readme1.PNG)
+
+![main page](./assets/image/readme2.PNG)
+
+![main page](./assets/image/readme3.PNG)
+
+
+
 ## Features
 
 Our website includes the following features:
@@ -43,3 +51,11 @@ Our website includes the following features:
 - Ability to search for recipes by name or ingredient.
 
 - Mobile-friendly design, so you can browse recipes on the go.
+
+Credits
+
+The following people have all contributed to this app:
+
+* [AjinThapa2000](https://github.com/AjinThapa2000)
+* [Chirbirita](https://github.com/Chirbirita)
+* [k-juhi](https://github.com/k-juhi)
