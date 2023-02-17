@@ -7,9 +7,9 @@
 }
 
 :root {
-  --primary: blue;
-  --secondary: blue;
-  --dark: black;
+  --primary: #219ebc;
+  --secondary: #8ecae6;
+  --dark: #023047;
 }
 
 body {
@@ -168,8 +168,8 @@ body {
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
-  color: #100f0f;
-  background: rgb(162, 236, 227);
+  color: #023047;
+  background: #ffb703;
   border-radius: 1rem;
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
@@ -225,7 +225,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  background-color: #f44336;
+  background-color: #fb8500;
   color: #fff;
   font-size: 24px;
   font-weight: bold;
@@ -252,7 +252,7 @@ body {
 }
 
 .header {
-  background-color: rgb(12, 12, 12);
+  background-color: #023047;
   margin-top: 0%;
 }
 
