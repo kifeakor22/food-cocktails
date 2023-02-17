@@ -88,6 +88,18 @@ function mealRecipe(meal) {
     foodinstruction.addClass('showRecipe');
 }
 
+
+// call the getCocktailByName function when .searchCoctail is clicked
+//$(".searchCocktail").on("click", getCocktailByName)
+
+// code to clear modal form everytime for fresh input
+//$('#cocktailModal').on('shown.bs.modal', function () {
+//   $('#getCocktailForm')[0].reset();
+//});
+
+//$(".searchCocktail").on("click", getCocktailByName)
+//$("drinkByName").empty()
+//display ingredients
 const dispIngred = (meal) => {
     const list = document.createElement('ul')
     list.className = 'text-center mx-auto'
