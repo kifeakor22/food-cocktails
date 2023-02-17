@@ -13,6 +13,7 @@
   --dark: #023047;
 }
 
+
 body {
   font-weight: 300;
   font-size: 1.05rem;
@@ -410,7 +411,7 @@ h4 {
 }
 
 #search-button {
-  background-color: rgb(9, 129, 19);
+ 
   border: none;
   cursor: pointer;
   padding: 10px;
@@ -540,7 +541,6 @@ h4 {
 .recipe-instruction {
   position: relative;
 
-  overflow-y: auto;
 }
 r .recipe-instruction > h4 {
   color: black;
@@ -554,4 +554,9 @@ r .recipe-instruction > h4 {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+#autocomplete-list {
+  position: relative;
+  top: 20px;
 }
