@@ -70,10 +70,11 @@ function setAPIURL(apiSearchParam) {
 
 
 //get suggestions as user types
-async function getSuggestions({ target }) {
-    let inputData = target.value;
+let timeoutId;
 
-    currentFocus = -1;
+async function getSuggestions({ target }) {
+  let inputData = target.value;
+
 
     if (!inputData.length) closeAllLists();
 
@@ -82,8 +83,19 @@ async function getSuggestions({ target }) {
         suggestionBox.setAttribute('id', 'autocomplete-list');
         suggestionBox.setAttribute('class', 'autocomplete-items')
 
-        this.parentNode.appendChild(suggestionBox)
+  if (inputData.length) {
+    let suggestionBox = document.getElementById('autocomplete-list');
+    if (!suggestionBox) {
+      suggestionBox = document.createElement('ul');
+      suggestionBox.setAttribute('id', 'autocomplete-list');
+      suggestionBox.setAttribute('class', 'autocomplete-items')
 
+      this.parentNode.appendChild(suggestionBox)
+    }
+
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(async () => {
+     
         let suggestions = await getSuggestionsFromAPI(inputData)
         if (suggestions) {
             let suggestionList = suggestions.filter((suggestion) => (suggestion[queryKey].toLowerCase().includes(inputData)))
@@ -92,31 +104,45 @@ async function getSuggestions({ target }) {
                 suggestionBox.appendChild(suggestionItem);
                 suggestionItem.setAttribute('class', 'suggestion-item')
 
-                let mealName = document.createElement('p')
+
+        let suggestionList = suggestions.filter((suggestion) => (suggestion[queryKey].toLowerCase().includes(inputData)))
+        suggestionBox.innerHTML = '';
+        suggestionList.map(suggested => {
+          let suggestionItem = document.createElement('li');
+          suggestionBox.appendChild(suggestionItem);
+          suggestionItem.setAttribute('class', 'suggestion-item')
+
+          let mealName = document.createElement('p')
 
 
-                suggestionItem.appendChild(mealName);
+          suggestionItem.appendChild(mealName);
+          suggestionItem.style.borderBottom = '1px solid blue';
 
-                mealName.innerHTML = suggested[queryKey]
+          mealName.innerHTML = suggested[queryKey]
 
 
-                mealName.addEventListener("click", async ({ target }) => {
-                    mealInput.value = target.innerHTML.trim()
+          mealName.addEventListener("click", async ({ target }) => {
+            mealInput.value = target.innerHTML.trim()
 
-                    callApiWithFilterInUrl(target.innerHTML, suggested)
+            callApiWithFilterInUrl(target.innerHTML, suggested)
 
-                    closeAllLists();
-                })
-            })
-        } else {
-            let suggestionItem = document.createElement('li');
-            suggestionBox.appendChild(suggestionItem);
-            suggestionItem.setAttribute('class', 'suggestion-item')
+            closeAllLists();
+          })
+        })
+      } else {
+        suggestionBox.innerHTML = '<li class="suggestion-item"><p> No item in our DB </p></li>'
+      }
+    }, 500);
+  } else {
+    closeAllLists();
+  }
+}
 
-            suggestionBox.innerHTML = '<p> No item in our DB </p>'
-        }
-
-    }
+function closeAllLists() {
+  let suggestionBox = document.getElementById('autocomplete-list');
+  if (suggestionBox) {
+    suggestionBox.parentNode.removeChild(suggestionBox);
+  }
 }
 
 // form submission
