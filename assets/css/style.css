@@ -325,7 +325,8 @@ button {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
     overflow-y: scroll;
-    height: 26rem;
+    height: fit-content;
+    max-height: 50vh;
   }
   .food-item {
     margin: 0;
@@ -349,7 +350,8 @@ button {
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
     overflow-y: scroll;
-    height: 21rem;
+    height: fit-content;
+    max-height: 50vh;
   }
   .food-item {
     margin: 0;
@@ -372,7 +374,8 @@ button {
     display: grid;
     gap: 0.2rem;
     overflow-y: scroll;
-    height: 20rem;
+    height: fit-content;
+    max-height: 50vh;
   }
   body #autocomplete-list {
     z-index: 10;
@@ -386,7 +389,8 @@ button {
     display: grid;
     gap: 0.2rem;
     overflow-y: scroll;
-    height: 20rem;
+    height: fit-content;
+    max-height: 50vh;
   }
 
   body #autocomplete-list {
